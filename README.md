@@ -1,16 +1,16 @@
-# ♠ Mr.Blackjack
+# Mr.Blackjack
 
 A fully-featured browser-based Blackjack game built with vanilla HTML, CSS, and JavaScript.
 
-**Live Demo:** [https://yourusername.github.io/blackjack-royale](https://yourusername.github.io/blackjack-royale) *(update after deploying)*
+# Live Demo: 
+- [https://yourusername.github.io/blackjack-royale]
+- (https://yourusername.github.io/blackjack-royale) 
 
 ## Description
 
 Mr.Blackjack is a polished, single-page Blackjack application where you start with $1,000 in virtual chips and try to grow your bankroll through smart betting and strategy. The game follows standard casino rules and saves your progress between sessions using localStorage.
 
 **Target users:** Anyone who wants to practice blackjack strategy, learn the rules, or just have fun without real money on the line.
-
----
 
 ## Features
 
