@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="casino">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mr.Blackjack – a fully featured browser blackjack game with betting, stats, and strategy tips." />
+  <title>Mr.Blackjack</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ───────────── NAVIGATION ───────────── -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">♠ Mr.Blackjack</div>
+
+    <div class="nav-links">
+      <button class="nav-btn active" id="nav-home"  onclick="showView('home')"  aria-current="page">Home</button>
+      <button class="nav-btn"        id="nav-game"  onclick="showView('game')">Play</button>
+      <button class="nav-btn"        id="nav-stats" onclick="showView('stats')">Stats</button>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle colour theme">
+      🌙 Dark Mode
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       VIEW 1 – HOME
+  ═══════════════════════════════════════ -->
+  <section id="view-home" class="view active" aria-labelledby="home-title">
+
+    <div class="hero">
+      <div class="hero-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
+      <h1 id="home-title">Mr.Blackjack</h1>
+      <p class="hero-sub">Test your luck and strategy at the digital casino table. Start with $1,000 — can you double it?</p>
+      <button class="btn-primary btn-large" onclick="showView('game')">Play Now</button>
+    </div>
+
+    <div class="rules-section">
+      <h2>How to Play</h2>
+      <div class="rules-grid">
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">🃏</div>
+          <h3>The Goal</h3>
+          <p>Beat the dealer by getting a hand value as close to 21 as possible without going over (busting).</p>
+        </article>
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">🔢</div>
+          <h3>Card Values</h3>
+          <p>Number cards = face value. Face cards (J, Q, K) = 10. Ace = 1 <em>or</em> 11 — whichever is better for your hand.</p>
+        </article>
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">🎯</div>
+          <h3>Your Options</h3>
+          <ul>
+            <li><strong>Hit</strong> – draw another card</li>
+            <li><strong>Stand</strong> – keep your current hand</li>
+            <li><strong>Double Down</strong> – double your bet and receive exactly one more card</li>
+          </ul>
+        </article>
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">🏦</div>
+          <h3>Dealer Rules</h3>
+          <p>The dealer must hit on 16 or less and stand on 17 or more. One dealer card starts face-down.</p>
+        </article>
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">💰</div>
+          <h3>Payouts</h3>
+          <ul>
+            <li>Win → <strong>1:1</strong></li>
+            <li>Push (tie) → <strong>Bet back</strong></li>
+            <li>Blackjack → <strong>3:2</strong></li>
+          </ul>
+        </article>
+
+        <article class="rule-card">
+          <div class="rule-icon" aria-hidden="true">♠</div>
+          <h3>Blackjack!</h3>
+          <p>An Ace + a 10-value card on the first two cards = Blackjack. Pays 3:2 unless the dealer also has Blackjack (push).</p>
+        </article>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       VIEW 2 – GAME
+  ═══════════════════════════════════════ -->
+  <section id="view-game" class="view" aria-labelledby="game-title">
+    <h2 id="game-title" class="sr-only">Blackjack Game</h2>
+
+    <div class="game-container">
+
+      <!-- Bankroll Bar -->
+      <div class="bankroll-bar">
+        <span>Bankroll: <strong>$<span id="bankroll-display">1,000</span></strong></span>
+        <span class="bet-display">Bet: <strong>$<span id="bet-display">0</span></strong></span>
+      </div>
+
+      <!-- Dealer Area -->
+      <div class="dealer-area table-area">
+        <div class="area-label">Dealer
+          <span class="score-badge" id="dealer-score-badge" aria-live="polite"></span>
+        </div>
+        <div class="hand" id="dealer-hand" role="list" aria-label="Dealer's hand"></div>
+      </div>
+
+      <!-- Message Banner -->
+      <div class="message-banner" id="message-banner" role="alert" aria-live="assertive"></div>
+
+      <!-- Player Area -->
+      <div class="player-area table-area">
+        <div class="area-label">You
+          <span class="score-badge" id="player-score-badge" aria-live="polite"></span>
+        </div>
+        <div class="hand" id="player-hand" role="list" aria-label="Your hand"></div>
+      </div>
+
+      <!-- ── BETTING PANEL ── -->
+      <div class="panel" id="betting-panel">
+        <p class="panel-title">Place Your Bet</p>
+        <div class="chip-row" role="group" aria-label="Chip buttons">
+          <button class="chip chip-5"   onclick="addToBet(5)"   aria-label="Add $5 chip">$5</button>
+          <button class="chip chip-10"  onclick="addToBet(10)"  aria-label="Add $10 chip">$10</button>
+          <button class="chip chip-25"  onclick="addToBet(25)"  aria-label="Add $25 chip">$25</button>
+          <button class="chip chip-50"  onclick="addToBet(50)"  aria-label="Add $50 chip">$50</button>
+          <button class="chip chip-100" onclick="addToBet(100)" aria-label="Add $100 chip">$100</button>
+        </div>
+        <div class="bet-action-row">
+          <button class="btn-secondary" onclick="clearBet()">Clear Bet</button>
+          <button class="btn-secondary" onclick="maxBet()">Max Bet</button>
+          <button class="btn-primary"   onclick="dealHand()" id="deal-btn">Deal</button>
+        </div>
+        <p class="bet-hint" id="bet-hint" aria-live="polite"></p>
+      </div>
+
+      <!-- ── GAME ACTION PANEL ── -->
+      <div class="panel hidden" id="action-panel">
+        <button class="btn-action" onclick="playerHit()"    id="btn-hit">Hit</button>
+        <button class="btn-action" onclick="playerStand()"  id="btn-stand">Stand</button>
+        <button class="btn-action" onclick="playerDouble()" id="btn-double">Double Down</button>
+      </div>
+
+      <!-- ── ROUND OVER PANEL ── -->
+      <div class="panel hidden" id="round-over-panel">
+        <button class="btn-primary" onclick="nextRound()">Next Round</button>
+        <button class="btn-secondary" onclick="showView('stats')">View Stats</button>
+      </div>
+
+      <!-- ── BROKE PANEL ── -->
+      <div class="panel hidden" id="broke-panel">
+        <p class="broke-msg">You're out of chips! 😬</p>
+        <button class="btn-primary" onclick="resetGame()">Start Over ($1,000)</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       VIEW 3 – STATS
+  ═══════════════════════════════════════ -->
+  <section id="view-stats" class="view" aria-labelledby="stats-title">
+    <h2 id="stats-title" class="section-title">Your Statistics</h2>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-bankroll">$1,000</div>
+        <div class="stat-label">Current Bankroll</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-hands">0</div>
+        <div class="stat-label">Hands Played</div>
+      </div>
+
+      <div class="stat-card highlight-win">
+        <div class="stat-value" id="stat-wins">0</div>
+        <div class="stat-label">Wins</div>
+      </div>
+
+      <div class="stat-card highlight-loss">
+        <div class="stat-value" id="stat-losses">0</div>
+        <div class="stat-label">Losses</div>
+      </div>
+
+      <div class="stat-card highlight-push">
+        <div class="stat-value" id="stat-pushes">0</div>
+        <div class="stat-label">Pushes</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-win-pct">—</div>
+        <div class="stat-label">Win Rate</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-streak">0</div>
+        <div class="stat-label">Current Streak</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-best-streak">0</div>
+        <div class="stat-label">Best Win Streak</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-value" id="stat-peak">$1,000</div>
+        <div class="stat-label">Peak Bankroll</div>
+      </div>
+
+    </div>
+
+    <!-- History Table -->
+    <div class="history-section">
+      <div class="history-header">
+        <h3>Recent Hands</h3>
+        <div class="filter-row" role="group" aria-label="Filter history by result">
+          <button class="filter-btn active" data-filter="all"  onclick="filterHistory('all')">All</button>
+          <button class="filter-btn"        data-filter="win"  onclick="filterHistory('win')">Wins</button>
+          <button class="filter-btn"        data-filter="loss" onclick="filterHistory('loss')">Losses</button>
+          <button class="filter-btn"        data-filter="push" onclick="filterHistory('push')">Pushes</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="history-table" id="history-table" aria-label="Hand history">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Result</th>
+              <th scope="col">Your Score</th>
+              <th scope="col">Dealer Score</th>
+              <th scope="col">Bet</th>
+              <th scope="col">Profit/Loss</th>
+            </tr>
+          </thead>
+          <tbody id="history-body">
+            <tr><td colspan="6" class="empty-row">No hands played yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn-secondary btn-reset-stats" onclick="confirmResetStats()">Reset Statistics</button>
+    </div>
+
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
