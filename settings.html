@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Settings and project notes for InboxDue." />
+  <title>InboxDue | Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-wrap">
+      <p class="eyebrow">InboxDue</p>
+      <h1>Settings and Notes</h1>
+      <p class="subtitle">Control your prototype experience and track next steps.</p>
+    </div>
+    <button id="themeToggle" class="button secondary" aria-label="Toggle color theme">Switch Theme</button>
+  </header>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="index.html">Dashboard</a>
+    <a href="detail.html">Email Detail</a>
+    <a href="settings.html" class="active">Settings</a>
+  </nav>
+
+  <main class="page-shell">
+    <section class="card">
+      <h2>Project Mode</h2>
+      <p>This prototype currently uses mock inbox data so it can run as a static web app on GitHub Pages.</p>
+      <p>Next milestone: optional real Gmail API integration via OAuth.</p>
+    </section>
+
+    <section class="card">
+      <h2>Local Preferences</h2>
+      <p>Theme and completed items are saved in local storage.</p>
+      <button id="clearStorage" class="button">Clear Saved Data</button>
+      <p id="settingsFeedback" class="feedback" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>Day 1-2 Checklist</h2>
+      <ul class="plain-list">
+        <li>Three pages/views implemented</li>
+        <li>Responsive layout with media queries</li>
+        <li>JavaScript interactivity and dynamic rendering</li>
+        <li>Form validation and user feedback</li>
+        <li>Local storage persistence</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="js/settings.js"></script>
+</body>
+</html>

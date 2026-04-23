@@ -2,7 +2,7 @@
 
 # What I'm building
 
-A Chrome Extension called InboxDue that turns Gmail into a structured task dashboard — automatically detecting which emails need a reply, have a deadline, or contain action items, and surfacing them in a clean side panel.
+A web app called InboxDue that turns inbox-style messages into a structured task dashboard. It detects which emails need a reply, have a deadline, or contain action items, and surfaces them in a clean multi-page interface.
 
 # Who it's for / Who is my target. 
 
@@ -10,9 +10,10 @@ For students and professionals who live in their Gmail inbox but have no structu
 
 # Which API / Technologies I will try to use. I need to research more options still. 
 
-Gmail API (Google) — to read and scan the user's inbox: https://developers.google.com/gmail/api
-Claude API (Anthropic) — to detect deadlines, action items, and urgency in email content: https://www.anthropic.com
-Chrome Extensions API — manifest.json, content scripts, side panel: https://developer.chrome.com/docs/extensions
+HTML, CSS, JavaScript (core stack for the required responsive web app)
+Local Storage API — to save user preferences and completed items
+Gmail API (Google, stretch) — for real inbox integration later: https://developers.google.com/gmail/api
+Claude API (Anthropic, stretch) — for advanced detection and summaries: https://www.anthropic.com
 
 # Core features ( initial idea) 
 
@@ -30,8 +31,7 @@ Chrome Extensions API — manifest.json, content scripts, side panel: https://de
 
 # What I don't know yet
 
-How to authenticate with the Gmail API using OAuth inside a Chrome Extension
-How to inject a side panel into Gmail without breaking the existing UI
+How to authenticate with the Gmail API using OAuth in a browser-based app
 How to handle API rate limits if the user has hundreds of emails
-How to store the "done" state across sessions using Chrome's storage API
-How to keep the extension fast while making multiple API calls in the background
+How to store the "done" state across sessions (currently using local storage)
+How to keep the app fast while making multiple API calls in the background
