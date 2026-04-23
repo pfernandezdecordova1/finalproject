@@ -1,7 +1,96 @@
 # InboxDue
 
-InboxDue is a responsive web application prototype that turns inbox-style messages into a clear action dashboard.
-It is designed for students and professionals who need a fast way to spot replies, deadlines, and tasks.
+InboxDue is a responsive web application that connects to your real Gmail inbox via Google OAuth and surfaces what actually needs your attention — replies, deadlines, and action items — in one organized dashboard.
+
+No more scanning every message. InboxDue does the work for you.
+
+## Live Demo URL
+
+Pending deployment (Netlify or Vercel) — link will be added before 5/1 submission.
+
+## Who It's For
+
+Students and professionals who live in Gmail but have no structured way to track what actually needs action. Emails pile up, deadlines get buried, important replies get forgotten. InboxDue solves this by doing what Canvas does for assignments — but for your inbox.
+
+## Features
+
+- **Sign in with Google** — OAuth 2.0 login using Google Identity Services (read-only access)
+- **Demo mode** — try it instantly without signing in using realistic mock data
+- **Needs Reply** — surfaces unread emails where a response is likely expected
+- **Has Deadline** — detects time-sensitive language ("due Friday", "RSVP before…")
+- **Action Items** — flags messages asking you to do something
+- **One-line summary** — each email shows a clear statement of what's needed
+- **Mark as done** — dismiss completed items (persisted in local storage)
+- **Filter by category** — view only replies, deadlines, or action items
+- **Sort by urgency, deadline, or sender**
+- **Search** — filter by subject or sender with form validation
+- **Theme toggle** — light and dark mode, saved in local storage
+- **Sign out** — revokes OAuth token and returns to login screen
+
+## Technologies Used
+
+- HTML5 (semantic layout, accessibility attributes)
+- CSS3 (Flexbox/Grid, responsive layout, media queries, CSS custom properties)
+- Vanilla JavaScript (DOM manipulation, events, fetch, local storage, session storage)
+- Google Identity Services (OAuth 2.0 implicit flow — no backend required)
+- Gmail REST API (inbox read, user profile)
+- Google Fonts (Space Grotesk, Source Sans 3)
+
+## Setup (Gmail API)
+
+To connect your real Gmail inbox:
+1. Go to [console.cloud.google.com](https://console.cloud.google.com), create a project, and enable the **Gmail API**.
+2. Under **Credentials**, create an **OAuth 2.0 Client ID** (Web Application type).
+3. Add your deployed Netlify/Vercel URL as an **Authorized JavaScript Origin**.
+4. Paste the Client ID into `js/auth.js` at the top of the file.
+
+Until a Client ID is set, the Sign In button is automatically disabled and the app runs in demo mode.
+
+## Deployment
+
+GitHub Pages does not support the OAuth origin requirements reliably.
+This project will be deployed to **Netlify** or **Vercel**.
+
+## AI Tools Used
+
+- **GitHub Copilot** — scaffolding, code structure, and implementation support throughout
+- All generated code was reviewed, tested, and adjusted to match course requirements
+
+## Challenges and Solutions
+
+- **Original concept was a Chrome Extension** — incompatible with course deployment requirements. Pivoted to a web app with the same product idea, which is actually more accessible (no install needed).
+- **Gmail OAuth in a static app** — solved using Google Identity Services implicit flow, which works entirely in the browser without a backend server.
+- **Deadline detection without an AI API** — implemented keyword-based regex classifier in `js/gmail.js` that runs in the browser for free and covers the most common patterns.
+- **Persisting done state across pages** — used local storage with a Set of completed IDs.
+
+## Future Improvements
+
+- Integrate Claude or OpenAI API for smarter summaries and deadline extraction
+- Add pagination for large inboxes
+- Group emails by thread instead of individual messages
+- Email count badge on the browser tab
+- Push notifications for approaching deadlines
+
+## Project Structure
+
+```
+finalproject/
+├── index.html         # Dashboard (login screen + main app)
+├── detail.html        # Single email detail view
+├── settings.html      # Account, preferences, setup guide
+├── css/
+│   └── style.css
+├── js/
+│   ├── auth.js        # Google OAuth (Identity Services)
+│   ├── gmail.js       # Gmail API fetch + classification
+│   ├── data.js        # Mock email data for demo mode
+│   ├── main.js        # Dashboard controller
+│   ├── detail.js      # Detail page controller
+│   └── settings.js    # Settings page controller
+├── assets/
+├── proposal.md
+└── README.md
+```
 
 ## Live Demo URL
 

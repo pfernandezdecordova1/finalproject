@@ -9,15 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
   <header class="site-header">
     <div class="brand-wrap">
       <p class="eyebrow">InboxDue</p>
-      <h1>Settings and Notes</h1>
-      <p class="subtitle">Control your prototype experience and track next steps.</p>
+      <h1>Settings</h1>
+      <p class="subtitle">Manage your account, preferences, and project info.</p>
     </div>
-    <button id="themeToggle" class="button secondary" aria-label="Toggle color theme">Switch Theme</button>
+    <div class="header-actions">
+      <span id="userInfo" class="user-info"></span>
+      <button id="themeToggle" class="button secondary" aria-label="Toggle color theme">Switch Theme</button>
+    </div>
   </header>
 
   <nav class="site-nav" aria-label="Main navigation">
@@ -28,27 +32,42 @@
 
   <main class="page-shell">
     <section class="card">
-      <h2>Project Mode</h2>
-      <p>This prototype currently uses mock inbox data so it can run as a static web app on GitHub Pages.</p>
-      <p>Next milestone: optional real Gmail API integration via OAuth.</p>
+      <h2>Account</h2>
+      <p id="accountStatus">Loading…</p>
+      <div class="email-actions">
+        <button id="signOutBtn" class="button secondary">Sign Out</button>
+        <a href="index.html" class="button secondary">Back to Dashboard</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Gmail API Setup</h2>
+      <p>To enable real inbox data you need a Google OAuth Client ID.</p>
+      <ol class="plain-list setup-steps">
+        <li>Go to <strong>console.cloud.google.com</strong> and create a project.</li>
+        <li>Enable the <strong>Gmail API</strong> for your project.</li>
+        <li>Under <em>Credentials</em>, create an <strong>OAuth 2.0 Client ID</strong> (Web Application).</li>
+        <li>Add your deployed URL as an Authorized JavaScript Origin.</li>
+        <li>Copy the Client ID and paste it into <code>js/auth.js</code> at the top.</li>
+      </ol>
     </section>
 
     <section class="card">
       <h2>Local Preferences</h2>
-      <p>Theme and completed items are saved in local storage.</p>
+      <p>Theme and completed items are saved in your browser's local storage.</p>
       <button id="clearStorage" class="button">Clear Saved Data</button>
       <p id="settingsFeedback" class="feedback" aria-live="polite"></p>
     </section>
 
     <section class="card">
-      <h2>Day 1-2 Checklist</h2>
+      <h2>About InboxDue</h2>
+      <p>InboxDue connects to your real Gmail inbox via Google OAuth and surfaces what actually needs your attention — no more scanning every message manually.</p>
       <ul class="plain-list">
-        <li>Three pages/views implemented</li>
-        <li>Responsive layout with media queries</li>
-        <li>JavaScript interactivity and dynamic rendering</li>
-        <li>Form validation and user feedback</li>
-        <li>Local storage persistence</li>
+        <li>Needs Reply — emails where a response is expected</li>
+        <li>Has Deadline — time-sensitive messages</li>
+        <li>Action Items — emails asking you to do something</li>
       </ul>
+      <p>All classification runs in your browser. InboxDue never sends, modifies, or deletes any email.</p>
     </section>
   </main>
 

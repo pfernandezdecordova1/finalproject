@@ -1,3 +1,7 @@
+// main.js — Dashboard controller.
+// Uses real Gmail data when signed in via OAuth, falls back to mock data in demo mode.
+// AI TOOL NOTE: Core render/filter logic was scaffolded with GitHub Copilot and reviewed manually.
+
 const STORAGE_KEYS = {
   done: "inboxdue_done_ids",
   theme: "inboxdue_theme"
@@ -14,11 +18,15 @@ const elements = {
   themeToggle: document.getElementById("themeToggle"),
   countReply: document.getElementById("countReply"),
   countDeadline: document.getElementById("countDeadline"),
-  countAction: document.getElementById("countAction")
+  countAction: document.getElementById("countAction"),
+  userInfo: document.getElementById("userInfo")
 };
 
 let doneIds = new Set(JSON.parse(localStorage.getItem(STORAGE_KEYS.done) || "[]"));
 let searchTerm = "";
+
+// Holds the email data currently displayed — either real Gmail or mock
+let activeEmails = [];
 
 function applySavedTheme() {
   const savedTheme = localStorage.getItem(STORAGE_KEYS.theme);
@@ -46,7 +54,8 @@ function getFilteredEmails() {
   const selectedCategory = elements.categoryFilter.value;
   const selectedSort = elements.sortMode.value;
 
-  let filtered = MOCK_EMAILS.filter((item) => {
+  // Filter from whichever data source is active (real or mock)
+  let filtered = activeEmails.filter((item) => {
     const passesCategory = selectedCategory === "all" || item.category === selectedCategory;
     const query = searchTerm.trim().toLowerCase();
     const passesSearch = !query || item.subject.toLowerCase().includes(query) || item.sender.toLowerCase().includes(query);
@@ -174,9 +183,58 @@ function resetDoneState() {
   renderEmails();
 }
 
+// Show a loading state while Gmail fetch is in progress
+function showLoadingState() {
+  elements.list.replaceChildren();
+  const li = document.createElement("li");
+  li.className = "email-item loading-item";
+  li.textContent = "Loading your inbox…";
+  elements.list.appendChild(li);
+}
+
+// Show an error message in the list area
+function showErrorState(message) {
+  elements.list.replaceChildren();
+  const li = document.createElement("li");
+  li.className = "email-item";
+  li.textContent = message;
+  elements.list.appendChild(li);
+}
+
+// Called after successful OAuth — loads real Gmail data
+async function onSignedIn(token) {
+  showLoadingState();
+  try {
+    const profile = await fetchUserProfile(token);
+    if (profile && elements.userInfo) {
+      elements.userInfo.textContent = profile.emailAddress || "";
+      // Persist for settings page
+      sessionStorage.setItem("inboxdue_user_email", profile.emailAddress || "");
+    }
+    const emails = await loadGmailEmails(token, 20);
+    activeEmails = emails;
+    renderEmails();
+  } catch (err) {
+    console.error("Gmail fetch failed:", err);
+    showErrorState("Could not load inbox. Check your Client ID setup or try demo mode.");
+  }
+}
+
+// Called when user picks demo mode
+function onDemo() {
+  activeEmails = MOCK_EMAILS;
+  sessionStorage.setItem("inboxdue_demo", "true");
+  if (elements.userInfo) {
+    elements.userInfo.textContent = "Demo mode";
+  }
+  renderEmails();
+}
+
 function init() {
   applySavedTheme();
-  renderEmails();
+
+  // Start auth flow — login screen is shown by auth.js
+  initAuth({ onSignedIn, onDemo });
 
   elements.searchForm.addEventListener("submit", onFormSubmit);
   elements.list.addEventListener("click", onListClick);
