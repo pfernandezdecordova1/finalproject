@@ -18,15 +18,15 @@ This project is a fully-featured Blackjack web app playable in the browser. The 
 
 ## Views / Pages
 
-1. **Home** — Welcome screen with rules, payouts, and a Play Now button
-2. **Play** — The blackjack table with card rendering, chip betting, and game controls
-3. **Stats** — Statistics dashboard with aggregate stats and a filterable hand history table
+1. Home — Welcome screen with rules, payouts, and a Play Now button
+2. Play— The blackjack table with card rendering, chip betting, and game controls
+3. Stats — Statistics dashboard with aggregate stats and a filterable hand history table
 
 ## Technologies Used
 
-- **HTML5** — Semantic markup, ARIA labels, `role` attributes for accessibility
-- **CSS3** — Custom properties (theming), Flexbox/Grid layout, media queries, `@keyframes` card animations
-- **JavaScript (ES6+)** — Class-free modular design, Fisher-Yates shuffle, recursive dealer timing via `setTimeout`, localStorage API
+- HTML — Semantic markup, ARIA labels, (role) attributes for accessibility
+- CSS — Custom properties (theming), Flexbox/Grid layout, media queries, keyframes card animations
+- JavaScript — Class-free modular design, Fisher-Yates shuffle, recursive dealer timing via setting the timeouts, localStorage API
 
 No external libraries or frameworks were used.
 
@@ -39,4 +39,3 @@ No external libraries or frameworks were used.
 ## Challenges & Solutions
 
 One of the trickier parts of building Blackjack was handling Ace values correctly. The solution was a handValue() function that initially counts every Ace as 11, then reduces the total by 10 for each Ace as long as the hand exceeds 21 — mimicking exactly how a real dealer would think through it. Animating the dealer's card draws required a recursive setTimeout approach, so each card appears sequentially with natural timing rather than all at once. Persisting the player's bankroll and stats across page refreshes was solved by serializing the full game state to localStorage after every hand, so nothing is ever lost on reload. Finally, keeping the card layout clean on mobile meant using Flexbox with flex-wrap on the hand containers, combined with media queries to scale card dimensions down on smaller screens.
-

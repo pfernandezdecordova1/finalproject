@@ -3,37 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mr.Blackjack – a fully featured browser blackjack game with betting, stats, and strategy tips." />
+  <meta name="description" content="Mr.Blackjack – premium browser blackjack with real casino rules, betting system, strategy guide, and player stats." />
   <title>Mr.Blackjack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ───────────── NAVIGATION ───────────── -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-brand">♠ Mr.Blackjack</div>
-
     <div class="nav-links">
-      <button class="nav-btn active" id="nav-home"  onclick="showView('home')"  aria-current="page">Home</button>
-      <button class="nav-btn"        id="nav-game"  onclick="showView('game')">Play</button>
-      <button class="nav-btn"        id="nav-stats" onclick="showView('stats')">Stats</button>
+      <button class="nav-btn active" id="nav-home"     onclick="showView('home')"     aria-current="page">Home</button>
+      <button class="nav-btn"        id="nav-game"     onclick="showView('game')">Play</button>
+      <button class="nav-btn"        id="nav-strategy" onclick="showView('strategy')">Strategy</button>
+      <button class="nav-btn"        id="nav-stats"    onclick="showView('stats')">Stats</button>
     </div>
-
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle colour theme">
       🌙 Dark Mode
     </button>
   </nav>
 
-  <!-- ═══════════════════════════════════════
-       VIEW 1 – HOME
-  ═══════════════════════════════════════ -->
   <section id="view-home" class="view active" aria-labelledby="home-title">
 
     <div class="hero">
-      <div class="hero-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
-      <h1 id="home-title">Mr.Blackjack</h1>
-      <p class="hero-sub">Test your luck and strategy at the digital casino table. Start with $1,000 — can you double it?</p>
-      <button class="btn-primary btn-large" onclick="showView('game')">Play Now</button>
+      <div class="hero-bg-suits" aria-hidden="true">
+        <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+        <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">🏆 Premium Blackjack Experience</div>
+        <h1 id="home-title">Mr.Blackjack</h1>
+        <p class="hero-sub">The sharpest game of 21 on the web. Real casino rules, live betting, full strategy guides — and $1,000 in chips to get you started.</p>
+        <div class="hero-actions">
+          <button class="btn-primary btn-large" onclick="showView('game')">Play Now — It's Free</button>
+          <button class="btn-ghost" onclick="showView('strategy')">View Strategy Guide</button>
+        </div>
+        <div class="hero-stats-strip">
+          <div class="hstat"><span class="hstat-val">3:2</span><span class="hstat-lbl">BJ Payout</span></div>
+          <div class="hstat-divider"></div>
+          <div class="hstat"><span class="hstat-val">$1,000</span><span class="hstat-lbl">Starting Chips</span></div>
+          <div class="hstat-divider"></div>
+          <div class="hstat"><span class="hstat-val">Real Rules</span><span class="hstat-lbl">Vegas Standard</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-visual spades-visual" aria-hidden="true">
+            <div class="big-suit">♠</div>
+            <div class="card-fan">
+              <div class="fan-card fc1">A<br><span>♠</span></div>
+              <div class="fan-card fc2">K<br><span>♦</span></div>
+              <div class="fan-card fc3">J<br><span>♥</span></div>
+            </div>
+          </div>
+          <h3>Real Casino Rules</h3>
+          <p>Dealer hits on soft 16, stands on hard 17. Natural blackjack pays 3:2. Double down on any first two cards.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-visual chips-visual" aria-hidden="true">
+            <div class="chip-stack">
+              <div class="vis-chip vc-orange">$100</div>
+              <div class="vis-chip vc-purple">$50</div>
+              <div class="vis-chip vc-green">$25</div>
+              <div class="vis-chip vc-blue">$10</div>
+              <div class="vis-chip vc-red">$5</div>
+            </div>
+          </div>
+          <h3>Live Betting System</h3>
+          <p>Place bets with $5 to $100 chips. Clear, double down, or go all in. Every chip click feels like the real thing.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-visual chart-visual" aria-hidden="true">
+            <div class="mini-chart">
+              <div class="mc-row"><span class="mc-h">H</span><span class="mc-s">S</span><span class="mc-s">S</span><span class="mc-d">D</span></div>
+              <div class="mc-row"><span class="mc-s">S</span><span class="mc-s">S</span><span class="mc-d">D</span><span class="mc-h">H</span></div>
+              <div class="mc-row"><span class="mc-d">D</span><span class="mc-d">D</span><span class="mc-s">S</span><span class="mc-s">S</span></div>
+              <div class="mc-row"><span class="mc-h">H</span><span class="mc-h">H</span><span class="mc-h">H</span><span class="mc-s">S</span></div>
+            </div>
+          </div>
+          <h3>Full Strategy Guide</h3>
+          <p>Our built-in basic strategy chart covers every hard total, soft hand, and pair. Learn to play like a pro.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-visual stats-visual" aria-hidden="true">
+            <div class="mini-stats">
+              <div class="ms-bar"><div class="ms-fill win-fill" style="width:62%"></div><span>Wins 62%</span></div>
+              <div class="ms-bar"><div class="ms-fill loss-fill" style="width:30%"></div><span>Losses 30%</span></div>
+              <div class="ms-bar"><div class="ms-fill push-fill" style="width:8%"></div><span>Pushes 8%</span></div>
+            </div>
+          </div>
+          <h3>Track Your Performance</h3>
+          <p>Detailed stats for every session — win rate, win streaks, peak bankroll, and a hand-by-hand history log.</p>
+        </div>
+
+      </div>
     </div>
 
     <div class="rules-section">
@@ -58,7 +130,7 @@
           <ul>
             <li><strong>Hit</strong> – draw another card</li>
             <li><strong>Stand</strong> – keep your current hand</li>
-            <li><strong>Double Down</strong> – double your bet and receive exactly one more card</li>
+            <li><strong>Double Down</strong> – double your bet, receive exactly one more card</li>
           </ul>
         </article>
 
@@ -87,23 +159,27 @@
       </div>
     </div>
 
+    <div class="cta-banner">
+      <div class="cta-banner-inner">
+        <div class="cta-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
+        <h2>Ready to Beat the Dealer?</h2>
+        <p>$1,000 in chips. No registration. No risk. Just pure blackjack.</p>
+        <button class="btn-primary btn-large" onclick="showView('game')">Start Playing</button>
+      </div>
+    </div>
+
   </section>
 
-  <!-- ═══════════════════════════════════════
-       VIEW 2 – GAME
-  ═══════════════════════════════════════ -->
   <section id="view-game" class="view" aria-labelledby="game-title">
     <h2 id="game-title" class="sr-only">Blackjack Game</h2>
 
     <div class="game-container">
 
-      <!-- Bankroll Bar -->
       <div class="bankroll-bar">
         <span>Bankroll: <strong>$<span id="bankroll-display">1,000</span></strong></span>
         <span class="bet-display">Bet: <strong>$<span id="bet-display">0</span></strong></span>
       </div>
 
-      <!-- Dealer Area -->
       <div class="dealer-area table-area">
         <div class="area-label">Dealer
           <span class="score-badge" id="dealer-score-badge" aria-live="polite"></span>
@@ -111,10 +187,8 @@
         <div class="hand" id="dealer-hand" role="list" aria-label="Dealer's hand"></div>
       </div>
 
-      <!-- Message Banner -->
       <div class="message-banner" id="message-banner" role="alert" aria-live="assertive"></div>
 
-      <!-- Player Area -->
       <div class="player-area table-area">
         <div class="area-label">You
           <span class="score-badge" id="player-score-badge" aria-live="polite"></span>
@@ -122,7 +196,6 @@
         <div class="hand" id="player-hand" role="list" aria-label="Your hand"></div>
       </div>
 
-      <!-- ── BETTING PANEL ── -->
       <div class="panel" id="betting-panel">
         <p class="panel-title">Place Your Bet</p>
         <div class="chip-row" role="group" aria-label="Chip buttons">
@@ -140,20 +213,17 @@
         <p class="bet-hint" id="bet-hint" aria-live="polite"></p>
       </div>
 
-      <!-- ── GAME ACTION PANEL ── -->
       <div class="panel hidden" id="action-panel">
         <button class="btn-action" onclick="playerHit()"    id="btn-hit">Hit</button>
         <button class="btn-action" onclick="playerStand()"  id="btn-stand">Stand</button>
         <button class="btn-action" onclick="playerDouble()" id="btn-double">Double Down</button>
       </div>
 
-      <!-- ── ROUND OVER PANEL ── -->
       <div class="panel hidden" id="round-over-panel">
         <button class="btn-primary" onclick="nextRound()">Next Round</button>
         <button class="btn-secondary" onclick="showView('stats')">View Stats</button>
       </div>
 
-      <!-- ── BROKE PANEL ── -->
       <div class="panel hidden" id="broke-panel">
         <p class="broke-msg">You're out of chips! 😬</p>
         <button class="btn-primary" onclick="resetGame()">Start Over ($1,000)</button>
@@ -162,9 +232,117 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       VIEW 3 – STATS
-  ═══════════════════════════════════════ -->
+  <section id="view-strategy" class="view" aria-labelledby="strategy-title">
+
+    <div class="strategy-hero">
+      <div class="strategy-hero-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
+      <h2 id="strategy-title">Basic Strategy Guide</h2>
+      <p>The mathematically optimal plays for every hand situation. Memorise this chart to cut the house edge to under 0.5%.</p>
+    </div>
+
+    <div class="strategy-wrap">
+
+      <div class="strategy-legend">
+        <span class="leg-item"><span class="leg-dot leg-s"></span> S — Stand</span>
+        <span class="leg-item"><span class="leg-dot leg-h"></span> H — Hit</span>
+        <span class="leg-item"><span class="leg-dot leg-d"></span> D — Double Down</span>
+      </div>
+
+      <div class="chart-block">
+        <h3 class="chart-title">Hard Totals</h3>
+        <div class="table-scroll">
+          <table class="strategy-table" aria-label="Hard totals basic strategy">
+            <thead>
+              <tr>
+                <th scope="col">Your Hand</th>
+                <th scope="col">2</th><th scope="col">3</th><th scope="col">4</th>
+                <th scope="col">5</th><th scope="col">6</th><th scope="col">7</th>
+                <th scope="col">8</th><th scope="col">9</th><th scope="col">10</th>
+                <th scope="col">A</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">8 or less</th><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">9</th><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">10</th><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">11</th><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td></tr>
+              <tr><th scope="row">12</th><td class="ch">H</td><td class="ch">H</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">13</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">14</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">15</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">16</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">17 +</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="chart-block">
+        <h3 class="chart-title">Soft Totals <span class="chart-subtitle">(hand contains an Ace)</span></h3>
+        <div class="table-scroll">
+          <table class="strategy-table" aria-label="Soft totals basic strategy">
+            <thead>
+              <tr>
+                <th scope="col">Your Hand</th>
+                <th scope="col">2</th><th scope="col">3</th><th scope="col">4</th>
+                <th scope="col">5</th><th scope="col">6</th><th scope="col">7</th>
+                <th scope="col">8</th><th scope="col">9</th><th scope="col">10</th>
+                <th scope="col">A</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">A, 2</th><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 3</th><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 4</th><td class="ch">H</td><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 5</th><td class="ch">H</td><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 6</th><td class="ch">H</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 7</th><td class="cs">S</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cd">D</td><td class="cs">S</td><td class="cs">S</td><td class="ch">H</td><td class="ch">H</td><td class="ch">H</td></tr>
+              <tr><th scope="row">A, 8</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td></tr>
+              <tr><th scope="row">A, 9</th><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td><td class="cs">S</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tips-section">
+        <h3 class="chart-title">Pro Tips</h3>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-num">01</div>
+            <h4>Never take Insurance</h4>
+            <p>Insurance is a side bet that pays 2:1 if the dealer has blackjack. The long-run expected value is negative — always decline it.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-num">02</div>
+            <h4>Always Double on 11</h4>
+            <p>With a total of 11, doubling against any dealer upcard except an Ace gives you the highest mathematical edge.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-num">03</div>
+            <h4>Stand on soft 18 vs. 2–6</h4>
+            <p>A,7 (soft 18) is a strong hand against dealer upcards 2 through 6. Double if you can; otherwise stand.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-num">04</div>
+            <h4>Manage Your Bankroll</h4>
+            <p>Bet 1–5% of your bankroll per hand. This keeps you in the game through variance swings and lets strategy work over time.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-num">05</div>
+            <h4>Ignore "Hot Streaks"</h4>
+            <p>Each hand is independent. Don't increase bets after wins or decrease after losses based on gut feel — stick to the chart.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-num">06</div>
+            <h4>Hit 16 vs. Dealer 7+</h4>
+            <p>A hard 16 against dealer 7 through Ace is one of the worst hands in blackjack. Hit — standing is statistically worse.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <section id="view-stats" class="view" aria-labelledby="stats-title">
     <h2 id="stats-title" class="section-title">Your Statistics</h2>
 
@@ -217,7 +395,6 @@
 
     </div>
 
-    <!-- History Table -->
     <div class="history-section">
       <div class="history-header">
         <h3>Recent Hands</h3>
@@ -251,6 +428,14 @@
     </div>
 
   </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">♠ Mr.Blackjack</div>
+      <p class="footer-copy">For entertainment only. No real money involved.</p>
+      <div class="footer-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
+    </div>
+  </footer>
 
   <script src="js/main.js"></script>
 </body>
