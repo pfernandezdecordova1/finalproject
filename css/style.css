@@ -615,6 +615,154 @@ body {
   line-height: 1.6;
 }
 
+.hero-spotlights {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+.spotlight {
+  position: absolute; top: 0; width: 40%; height: 85%;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 75deg, rgba(212,175,55,0.06) 90deg, rgba(212,175,55,0.09) 92deg, rgba(212,175,55,0.06) 94deg, transparent 110deg);
+  transform-origin: top center;
+}
+.sl-1 { left: 10%;  transform: rotate(-12deg); }
+.sl-2 { left: 36%;  transform: rotate(0deg); opacity: 0.8; }
+.sl-3 { right: 10%; transform: rotate(12deg); }
+
+.hero-cards-left {
+  position: absolute;
+  left: -20px; bottom: 18%;
+  width: clamp(120px, 16vw, 220px);
+  opacity: 0.82;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.75));
+  pointer-events: none; z-index: 1;
+  animation: heroCardsFloat 6s ease-in-out infinite;
+}
+@keyframes heroCardsFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-12px) rotate(1deg); }
+}
+
+.hero-chips-right {
+  position: absolute;
+  right: -10px; bottom: 16%;
+  width: clamp(70px, 9vw, 120px);
+  opacity: 0.85;
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.7));
+  pointer-events: none; z-index: 1;
+  animation: heroChipsFloat 7s ease-in-out infinite;
+  animation-delay: -2s;
+}
+@keyframes heroChipsFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.hero-crown {
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-crown-inner {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #f9ef8a, #d4af37, #8a6010);
+  font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 800;
+  color: #1a0800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 28px rgba(212,175,55,0.7), 0 4px 16px rgba(0,0,0,0.7);
+  border: 2px solid rgba(255,240,130,0.5);
+  animation: crownPulse 3s ease-in-out infinite alternate;
+}
+@keyframes crownPulse {
+  from { box-shadow: 0 0 24px rgba(212,175,55,0.5), 0 4px 16px rgba(0,0,0,0.7); }
+  to   { box-shadow: 0 0 44px rgba(212,175,55,0.85), 0 4px 20px rgba(0,0,0,0.8); }
+}
+
+.hero-suit-row {
+  font-size: 1.1rem;
+  color: rgba(212,175,55,0.55);
+  letter-spacing: 0.55em;
+  margin: -0.5rem 0 -0.3rem;
+}
+
+.features-section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+}
+.fsh-suits {
+  font-size: 1.1rem; letter-spacing: 0.6em; color: rgba(212,175,55,0.5);
+}
+.features-section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--accent);
+  margin: 0;
+}
+.features-section-header p {
+  font-size: 1rem; color: var(--text-muted); max-width: 520px; line-height: 1.6;
+  margin: 0;
+}
+
+.feature-visual {
+  height: 180px;
+  overflow: hidden;
+}
+.feature-visual svg {
+  display: block; width: 100%; height: 100%;
+}
+
+.rules-header {
+  text-align: center; margin-bottom: 2rem;
+}
+.rules-divider {
+  display: inline-flex; align-items: center; gap: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.rd-suit { font-size: 1rem; opacity: 0.6; }
+.rd-text { font-size: inherit; }
+
+.cta-banner {
+  background:
+    radial-gradient(ellipse 130% 110% at 50% 50%, rgba(12,40,20,0.88) 0%, rgba(3,8,5,0.97) 65%, #020404 100%);
+  border-top: 1px solid rgba(212,175,55,0.2);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  padding: clamp(3rem, 7vw, 5.5rem) 1.5rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 100%;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 78deg, rgba(212,175,55,0.045) 90deg, rgba(212,175,55,0.07) 92deg, rgba(212,175,55,0.045) 94deg, transparent 106deg);
+  pointer-events: none;
+}
+.cta-card-art {
+  display: block; margin: 0 auto 0.5rem;
+  width: clamp(200px, 30vw, 320px);
+  filter: drop-shadow(0 10px 28px rgba(0,0,0,0.7));
+  opacity: 0.88;
+}
+.cta-card-art svg { display: block; width: 100%; }
+.cta-play-btn {
+  font-size: 1.2rem !important;
+  padding: 1.1rem 3.2rem !important;
+  box-shadow: 0 6px 28px rgba(212,175,55,0.5), 0 2px 8px rgba(0,0,0,0.5) !important;
+}
+.cta-hint {
+  font-size: 0.78rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 860px) {
+  .hero-cards-left  { display: none; }
+  .hero-chips-right { display: none; }
+}
+@media (max-width: 600px) {
+  .hero-crown-inner { width: 50px; height: 50px; font-size: 1.3rem; }
+  .hero-suit-row { font-size: 0.9rem; }
+}
+
 .game-container {
   display: flex;
   flex-direction: column;
