@@ -32,6 +32,47 @@
         <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
         <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
       </div>
+      <!-- Realistic casino table illustration (SVG) -->
+      <div class="hero-table-art" aria-hidden="true">
+        <svg viewBox="0 0 900 320" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ceiling lights -->
+          <ellipse cx="450" cy="20" rx="200" ry="40" fill="rgba(212,175,55,0.12)"/>
+          <ellipse cx="450" cy="18" rx="80" ry="20" fill="rgba(212,175,55,0.22)"/>
+          <!-- Light shafts -->
+          <path d="M370 38 L280 320 L520 320 L530 38 Z" fill="rgba(212,175,55,0.04)"/>
+          <!-- Table top - felt oval -->
+          <ellipse cx="450" cy="260" rx="420" ry="100" fill="#17562a"/>
+          <ellipse cx="450" cy="260" rx="395" ry="85" fill="#1a6031"/>
+          <!-- Felt inner glow -->
+          <ellipse cx="450" cy="240" rx="300" ry="60" fill="rgba(30,100,50,0.4)"/>
+          <!-- Table edge (wood rim) -->
+          <path d="M30 260 Q450 175 870 260 L900 280 Q450 200 0 280 Z" fill="#4a2c0a"/>
+          <path d="M35 258 Q450 173 865 258 Q450 178 35 258" stroke="rgba(212,175,55,0.6)" stroke-width="2" fill="none"/>
+          <!-- Betting circle on felt -->
+          <ellipse cx="450" cy="255" rx="80" ry="25" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <!-- Text on felt -->
+          <text x="450" y="260" text-anchor="middle" fill="rgba(212,175,55,0.35)" font-family="Georgia,serif" font-size="11">BLACKJACK PAYS 3 TO 2</text>
+          <!-- Card silhouettes on table -->
+          <rect x="350" y="215" width="50" height="72" rx="5" fill="#1a3a6b" transform="rotate(-8,375,251)"/>
+          <rect x="360" y="215" width="50" height="72" rx="5" fill="#f5f0e8" transform="rotate(3,385,251)"/>
+          <text x="365" y="235" fill="#c0392b" font-family="Georgia,serif" font-size="16" transform="rotate(3,365,235)">A</text>
+          <text x="363" y="247" fill="#c0392b" font-family="Georgia,serif" font-size="10" transform="rotate(3,363,247)">♥</text>
+          <!-- Dealer cards -->
+          <rect x="500" y="215" width="50" height="72" rx="5" fill="#1a3a6b" transform="rotate(5,525,251)"/>
+          <rect x="510" y="215" width="50" height="72" rx="5" fill="#f5f0e8" transform="rotate(-4,535,251)"/>
+          <text x="515" y="235" fill="#1a1a1a" font-family="Georgia,serif" font-size="16" transform="rotate(-4,515,235)">K</text>
+          <text x="513" y="247" fill="#1a1a1a" font-family="Georgia,serif" font-size="10" transform="rotate(-4,513,247)">♠</text>
+          <!-- Chips stacks -->
+          <ellipse cx="640" cy="258" rx="22" ry="8" fill="#c0392b"/>
+          <ellipse cx="640" cy="252" rx="22" ry="8" fill="#c0392b"/>
+          <ellipse cx="640" cy="246" rx="22" ry="8" fill="#27ae60"/>
+          <ellipse cx="640" cy="240" rx="22" ry="8" fill="#2980b9"/>
+          <!-- Second chip stack -->
+          <ellipse cx="270" cy="258" rx="18" ry="7" fill="#8e44ad"/>
+          <ellipse cx="270" cy="252" rx="18" ry="7" fill="#e67e22"/>
+          <ellipse cx="270" cy="246" rx="18" ry="7" fill="#8e44ad"/>
+        </svg>
+      </div>
       <div class="hero-content">
         <div class="hero-badge">🏆 Premium Blackjack Experience</div>
         <h1 id="home-title">Mr.Blackjack</h1>
@@ -173,37 +214,160 @@
   <section id="view-game" class="view" aria-labelledby="game-title">
     <h2 id="game-title" class="sr-only">Blackjack Game</h2>
 
-    <div class="game-container">
+    <div class="casino-scene">
 
-      <div class="bankroll-bar">
-        <span>Bankroll: <strong>$<span id="bankroll-display">1,000</span></strong></span>
-        <span class="bet-display">Bet: <strong>$<span id="bet-display">0</span></strong></span>
-      </div>
-
-      <div class="dealer-area table-area">
-        <div class="area-label">Dealer
-          <span class="score-badge" id="dealer-score-badge" aria-live="polite"></span>
+      <!-- Dealer Portrait -->
+      <div class="dealer-portrait-wrap" id="dealer-portrait-wrap">
+        <div class="dealer-portrait" id="dealer-portrait">
+          <!-- SVG Dealer Face -->
+          <svg class="dealer-svg" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" aria-label="Dealer portrait">
+            <!-- Background / Jacket -->
+            <rect width="160" height="200" fill="#0d0d0d" rx="12"/>
+            <!-- Suit jacket body -->
+            <path d="M10 200 L10 140 Q30 120 80 130 Q130 120 150 140 L150 200 Z" fill="#1a1a2e"/>
+            <path d="M10 200 L10 140 Q30 120 60 128 L65 200 Z" fill="#16213e"/>
+            <path d="M150 200 L150 140 Q130 120 100 128 L95 200 Z" fill="#16213e"/>
+            <!-- White shirt / bow-tie area -->
+            <path d="M65 128 L80 145 L95 128 L90 115 L70 115 Z" fill="#f5f0e8"/>
+            <!-- Bow tie -->
+            <path d="M70 118 L79 123 L70 128 Z" fill="#8b0000"/>
+            <path d="M81 118 L90 123 L81 128 Z" fill="#8b0000" transform="scale(-1,1) translate(-160,0)"/>
+            <path d="M88 118 L79 123 L88 128 Z" fill="#8b0000"/>
+            <ellipse cx="80" cy="123" rx="4" ry="4" fill="#a00000"/>
+            <!-- Neck -->
+            <rect x="72" y="105" width="16" height="14" rx="4" fill="#c8a882"/>
+            <!-- Head -->
+            <ellipse cx="80" cy="82" rx="36" ry="40" fill="#c8a882"/>
+            <!-- Hair -->
+            <path d="M44 75 Q44 42 80 40 Q116 42 116 75 Q112 52 80 50 Q48 52 44 75 Z" fill="#2c1810"/>
+            <!-- Side burns -->
+            <rect x="44" y="70" width="7" height="18" rx="3" fill="#2c1810"/>
+            <rect x="109" y="70" width="7" height="18" rx="3" fill="#2c1810"/>
+            <!-- Eyebrows -->
+            <path d="M58 68 Q68 64 73 68" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M87 68 Q92 64 102 68" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Eyes -->
+            <ellipse cx="65" cy="76" rx="7" ry="6" fill="white"/>
+            <ellipse cx="95" cy="76" rx="7" ry="6" fill="white"/>
+            <ellipse cx="65" cy="77" rx="4.5" ry="4.5" fill="#4a3520"/>
+            <ellipse cx="95" cy="77" rx="4.5" ry="4.5" fill="#4a3520"/>
+            <ellipse cx="65" cy="77" rx="2.8" ry="2.8" fill="#1a0a00"/>
+            <ellipse cx="95" cy="77" rx="2.8" ry="2.8" fill="#1a0a00"/>
+            <ellipse cx="66.5" cy="75.5" rx="1.2" ry="1.2" fill="white"/>
+            <ellipse cx="96.5" cy="75.5" rx="1.2" ry="1.2" fill="white"/>
+            <!-- Nose -->
+            <path d="M77 84 Q78 92 80 93 Q82 92 83 84" stroke="#b08060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M74 93 Q80 97 86 93" stroke="#b08060" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- Mouth - neutral -->
+            <g id="mouth-neutral">
+              <path d="M68 100 Q80 106 92 100" stroke="#8b5e52" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- Mouth - smile (hidden initially) -->
+            <g id="mouth-smile" style="display:none">
+              <path d="M66 98 Q80 110 94 98" stroke="#8b5e52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M66 98 Q80 115 94 98" fill="rgba(139,94,82,0.2)"/>
+            </g>
+            <!-- Mouth - frown (hidden initially) -->
+            <g id="mouth-frown" style="display:none">
+              <path d="M68 104 Q80 98 92 104" stroke="#8b5e52" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- Mouth - surprised (hidden initially) -->
+            <g id="mouth-surprised" style="display:none">
+              <ellipse cx="80" cy="102" rx="7" ry="5" fill="#5a2a20" stroke="#8b5e52" stroke-width="1.5"/>
+            </g>
+            <!-- Ear -->
+            <ellipse cx="44" cy="82" rx="6" ry="8" fill="#c0a070"/>
+            <ellipse cx="116" cy="82" rx="6" ry="8" fill="#c0a070"/>
+            <!-- Cheeks -->
+            <ellipse cx="55" cy="93" rx="10" ry="6" fill="rgba(200,100,80,0.18)" id="dealer-cheek-l"/>
+            <ellipse cx="105" cy="93" rx="10" ry="6" fill="rgba(200,100,80,0.18)" id="dealer-cheek-r"/>
+            <!-- Eyebrow raise overlay (for surprised) -->
+            <g id="brow-surprise" style="display:none">
+              <path d="M56 62 Q66 56 73 62" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M87 62 Q94 56 104 62" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- Sweat drop (when dealer busts) -->
+            <g id="dealer-sweat" style="display:none">
+              <ellipse cx="116" cy="58" rx="5" ry="7" fill="#5bc8ff" opacity="0.85"/>
+              <path d="M116 51 L119 56 L113 56 Z" fill="#5bc8ff" opacity="0.85"/>
+            </g>
+            <!-- Glasses -->
+            <ellipse cx="65" cy="76" rx="9" ry="8" fill="none" stroke="rgba(180,160,120,0.8)" stroke-width="1.8"/>
+            <ellipse cx="95" cy="76" rx="9" ry="8" fill="none" stroke="rgba(180,160,120,0.8)" stroke-width="1.8"/>
+            <line x1="74" y1="74" x2="86" y2="74" stroke="rgba(180,160,120,0.8)" stroke-width="1.8"/>
+            <line x1="44" y1="74" x2="56" y2="74" stroke="rgba(180,160,120,0.6)" stroke-width="1.8"/>
+            <line x1="104" y1="74" x2="116" y2="74" stroke="rgba(180,160,120,0.6)" stroke-width="1.8"/>
+          </svg>
+          <div class="dealer-name-tag">
+            <span>♠</span> Viktor <span>♠</span>
+          </div>
+          <div class="dealer-speech" id="dealer-speech">Good luck, player.</div>
         </div>
-        <div class="hand" id="dealer-hand" role="list" aria-label="Dealer's hand"></div>
       </div>
 
-      <div class="message-banner" id="message-banner" role="alert" aria-live="assertive"></div>
+      <!-- Game table -->
+      <div class="game-container">
 
-      <div class="player-area table-area">
-        <div class="area-label">You
-          <span class="score-badge" id="player-score-badge" aria-live="polite"></span>
+        <div class="bankroll-bar">
+          <span>💰 Bankroll: <strong>$<span id="bankroll-display">1,000</span></strong></span>
+          <span class="bet-display">🎯 Bet: <strong>$<span id="bet-display">0</span></strong></span>
         </div>
-        <div class="hand" id="player-hand" role="list" aria-label="Your hand"></div>
-      </div>
 
-      <div class="panel" id="betting-panel">
+        <div class="dealer-area table-area">
+          <div class="area-label">Dealer Viktor
+            <span class="score-badge" id="dealer-score-badge" aria-live="polite"></span>
+          </div>
+          <div class="hand" id="dealer-hand" role="list" aria-label="Dealer's hand"></div>
+        </div>
+
+        <div class="message-banner" id="message-banner" role="alert" aria-live="assertive"></div>
+
+        <div class="player-area table-area">
+          <div class="area-label">You — Player
+            <span class="score-badge" id="player-score-badge" aria-live="polite"></span>
+          </div>
+          <div class="hand" id="player-hand" role="list" aria-label="Your hand"></div>
+        </div>
+
+        <div class="panel" id="betting-panel">
         <p class="panel-title">Place Your Bet</p>
+        <!-- Chip tray -->
+        <div class="chip-tray" aria-hidden="true">
+          <div class="tray-label">Chip Tray</div>
+          <div class="tray-stacks">
+            <div class="tray-stack">
+              <div class="tray-chip tc-red"></div>
+              <div class="tray-chip tc-red"></div>
+              <div class="tray-chip tc-red"></div>
+            </div>
+            <div class="tray-stack">
+              <div class="tray-chip tc-blue"></div>
+              <div class="tray-chip tc-blue"></div>
+              <div class="tray-chip tc-blue"></div>
+            </div>
+            <div class="tray-stack">
+              <div class="tray-chip tc-green"></div>
+              <div class="tray-chip tc-green"></div>
+              <div class="tray-chip tc-green"></div>
+            </div>
+            <div class="tray-stack">
+              <div class="tray-chip tc-purple"></div>
+              <div class="tray-chip tc-purple"></div>
+              <div class="tray-chip tc-purple"></div>
+            </div>
+            <div class="tray-stack">
+              <div class="tray-chip tc-orange"></div>
+              <div class="tray-chip tc-orange"></div>
+              <div class="tray-chip tc-orange"></div>
+            </div>
+          </div>
+        </div>
         <div class="chip-row" role="group" aria-label="Chip buttons">
-          <button class="chip chip-5"   onclick="addToBet(5)"   aria-label="Add $5 chip">$5</button>
-          <button class="chip chip-10"  onclick="addToBet(10)"  aria-label="Add $10 chip">$10</button>
-          <button class="chip chip-25"  onclick="addToBet(25)"  aria-label="Add $25 chip">$25</button>
-          <button class="chip chip-50"  onclick="addToBet(50)"  aria-label="Add $50 chip">$50</button>
-          <button class="chip chip-100" onclick="addToBet(100)" aria-label="Add $100 chip">$100</button>
+          <button class="chip chip-5"   onclick="addToBet(5,this)"   aria-label="Add $5 chip">$5</button>
+          <button class="chip chip-10"  onclick="addToBet(10,this)"  aria-label="Add $10 chip">$10</button>
+          <button class="chip chip-25"  onclick="addToBet(25,this)"  aria-label="Add $25 chip">$25</button>
+          <button class="chip chip-50"  onclick="addToBet(50,this)"  aria-label="Add $50 chip">$50</button>
+          <button class="chip chip-100" onclick="addToBet(100,this)" aria-label="Add $100 chip">$100</button>
         </div>
         <div class="bet-action-row">
           <button class="btn-secondary" onclick="clearBet()">Clear Bet</button>
@@ -229,7 +393,8 @@
         <button class="btn-primary" onclick="resetGame()">Start Over ($1,000)</button>
       </div>
 
-    </div>
+    </div><!-- end game-container -->
+    </div><!-- end casino-scene -->
   </section>
 
   <section id="view-strategy" class="view" aria-labelledby="strategy-title">

@@ -1,3 +1,66 @@
+// ── Dealer personality ──────────────────────────────────────────────────────
+
+const DEALER_PHRASES = {
+  idle:    ["Good luck, player.", "Place your bet.", "Ready when you are.", "The cards await.", "Feeling lucky?"],
+  deal:    ["Cards are dealt.", "Here we go.", "Good hand? We'll see.", "Show me what you've got.", "The game begins."],
+  hit:     ["Bold move.", "Another card, eh?", "Brave.", "Sure about that?", "Taking a risk, I see."],
+  stand:   ["Standing. Wise.", "Let's see how that plays out.", "Standing pat.", "Playing it safe.", "Interesting choice."],
+  double:  ["Doubling down! Bold.", "Big bet. Big courage.", "All in on this one?", "High risk, high reward.", "A gambler's move."],
+  win:     ["Well played!", "Nicely done.", "Congratulations.", "You got me.", "Fair play."],
+  lose:    ["House wins.", "Better luck next time.", "Not today, friend.", "The house appreciates it.", "Tough hand."],
+  bust:    ["Bust! Over 21.", "Too many cards.", "Went too far.", "Busted. Happens to the best.", "Just a bit over."],
+  push:    ["We're even.", "A tie. How rare.", "Nobody wins, nobody loses.", "Perfect match."],
+  blackjack_player: ["Impressive! Blackjack!", "The hand of a champion.", "Blackjack! Well done!", "3 to 2 for you."],
+  blackjack_dealer: ["Dealer Blackjack.", "Not your day.", "The house has it.", "21 — dealer wins."],
+  broke:   ["You've run out of chips.", "The house thanks you.", "Come back stronger.", "Easy come, easy go."]
+};
+
+function dealerSay(category) {
+  const lines = DEALER_PHRASES[category] || DEALER_PHRASES.idle;
+  const text = lines[Math.floor(Math.random() * lines.length)];
+  const el = document.getElementById('dealer-speech');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('pop');
+  void el.offsetWidth; // trigger reflow
+  el.classList.add('pop');
+}
+
+function setDealerMouth(type) {
+  ['mouth-neutral','mouth-smile','mouth-frown','mouth-surprised'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const target = document.getElementById('mouth-' + type);
+  if (target) target.style.display = '';
+  const browSurprise = document.getElementById('brow-surprise');
+  if (browSurprise) browSurprise.style.display = (type === 'surprised') ? '' : 'none';
+  const sweat = document.getElementById('dealer-sweat');
+  if (sweat) sweat.style.display = (type === 'frown') ? '' : 'none';
+}
+
+function dealerAnimate(type) {
+  const svg = document.querySelector('.dealer-svg');
+  if (!svg) return;
+  svg.classList.remove('shake','bounce');
+  void svg.offsetWidth;
+  if (type === 'shake')  svg.classList.add('shake');
+  if (type === 'bounce') svg.classList.add('bounce');
+  // Remove animation class after it ends so it can replay
+  svg.addEventListener('animationend', () => {
+    svg.classList.remove('shake','bounce');
+  }, {once: true});
+}
+
+function setPortraitGlow(type) {
+  const portrait = document.querySelector('.dealer-portrait');
+  if (!portrait) return;
+  portrait.classList.remove('glow-win','glow-loss','glow-bj');
+  if (type) portrait.classList.add('glow-' + type);
+}
+
+// ── Patched game functions ───────────────────────────────────────────────────
+
 const SUITS  = ['♠', '♥', '♦', '♣'];
 const RANKS  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 const STARTING_BANKROLL = 1000;
@@ -107,7 +170,7 @@ function isBlackjack(hand) {
   return hand.length === 2 && handValue(hand) === 21;
 }
 
-function addToBet(amount) {
+function addToBet(amount, chipEl) {
   if (state.phase !== 'betting') return;
   const remaining = state.bankroll - state.currentBet;
   if (remaining <= 0) {
@@ -117,6 +180,13 @@ function addToBet(amount) {
   state.currentBet += Math.min(amount, remaining);
   updateBetDisplay();
   clearBetHint();
+  // Chip toss animation
+  if (chipEl) {
+    chipEl.classList.remove('toss');
+    void chipEl.offsetWidth;
+    chipEl.classList.add('toss');
+    chipEl.addEventListener('animationend', () => chipEl.classList.remove('toss'), {once: true});
+  }
 }
 
 function clearBet() {
@@ -154,6 +224,9 @@ function dealHand() {
   updateScores(true);
   setMessage('');
   showPanel('action-panel');
+  setDealerMouth('neutral');
+  setPortraitGlow(null);
+  dealerSay('deal');
   const playerBJ = isBlackjack(state.playerHand);
   const dealerBJ = isBlackjack(state.dealerHand);
   if (playerBJ || dealerBJ) {
@@ -167,6 +240,7 @@ function dealHand() {
 
 function playerHit() {
   if (state.phase !== 'playing') return;
+  dealerSay('hit');
   state.playerHand.push(drawCard());
   renderHands(true);
   updateScores(true);
@@ -174,17 +248,22 @@ function playerHit() {
   if (handValue(state.playerHand) > 21) {
     renderHands(false);
     updateScores(false);
+    setDealerMouth('smile');
+    dealerAnimate('bounce');
+    dealerSay('bust');
     resolveRound(false, false, true);
   }
 }
 
 function playerStand() {
   if (state.phase !== 'playing') return;
+  dealerSay('stand');
   dealerPlay();
 }
 
 function playerDouble() {
   if (state.phase !== 'playing') return;
+  dealerSay('double');
   const extraBet = Math.min(state.currentBet, state.bankroll - state.currentBet);
   state.currentBet += extraBet;
   updateBetDisplay();
@@ -254,8 +333,56 @@ function resolveRound(playerBJ, dealerBJ, playerBust = false) {
   state.bankroll += profit;
   updateStats(result, profit);
   setMessage(message, msgColor);
+
+  // Bankroll flash
+  const brEl = document.getElementById('bankroll-display');
+  if (brEl) {
+    brEl.classList.remove('bankroll-win','bankroll-loss');
+    void brEl.offsetWidth;
+    if (profit > 0) brEl.classList.add('bankroll-win');
+    else if (profit < 0) brEl.classList.add('bankroll-loss');
+    brEl.addEventListener('animationend', () => brEl.classList.remove('bankroll-win','bankroll-loss'), {once:true});
+  }
+
   updateBankrollDisplay();
+
+  // Dealer reactions
+  if (playerBJ && !dealerBJ) {
+    setDealerMouth('surprised');
+    dealerAnimate('shake');
+    setPortraitGlow('bj');
+    dealerSay('blackjack_player');
+  } else if (dealerBJ && !playerBJ) {
+    setDealerMouth('smile');
+    dealerAnimate('bounce');
+    setPortraitGlow('win');
+    dealerSay('blackjack_dealer');
+  } else if (playerBJ && dealerBJ) {
+    setDealerMouth('neutral');
+    dealerSay('push');
+  } else if (playerBust) {
+    setDealerMouth('smile');
+    dealerAnimate('bounce');
+    setPortraitGlow('win');
+    dealerSay('bust');
+  } else if (result === 'win') {
+    setDealerMouth('frown');
+    dealerAnimate('shake');
+    setPortraitGlow('loss');
+    dealerSay('win');
+  } else if (result === 'loss') {
+    setDealerMouth('smile');
+    dealerAnimate('bounce');
+    setPortraitGlow('win');
+    dealerSay('lose');
+  } else {
+    setDealerMouth('neutral');
+    setPortraitGlow(null);
+    dealerSay('push');
+  }
+
   showPanel(state.bankroll <= 0 ? 'broke-panel' : 'round-over-panel');
+  if (state.bankroll <= 0) dealerSay('broke');
   saveData();
 }
 
@@ -298,6 +425,9 @@ function nextRound() {
   updateBetDisplay();
   showPanel('betting-panel');
   document.getElementById('btn-double').disabled = false;
+  setDealerMouth('neutral');
+  setPortraitGlow(null);
+  dealerSay('idle');
 }
 
 function resetGame() {
@@ -385,7 +515,8 @@ function updateBetDisplay() {
 }
 
 function updateBankrollDisplay() {
-  document.getElementById('bankroll-display').textContent = state.bankroll.toLocaleString();
+  const el = document.getElementById('bankroll-display');
+  el.textContent = state.bankroll.toLocaleString();
 }
 
 function renderStats() {
@@ -498,6 +629,8 @@ function init() {
   updateBetDisplay();
   showPanel('betting-panel');
   showView('home');
+  // Greet on first load — slight delay so DOM is ready
+  setTimeout(() => dealerSay('idle'), 300);
 }
 
 init();

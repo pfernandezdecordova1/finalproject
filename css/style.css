@@ -181,15 +181,17 @@ body {
     radial-gradient(ellipse 90% 80% at 50% 55%, rgba(23,86,42,0.88) 0%, rgba(8,30,14,0.97) 65%, #050505 100%);
 }
 
-.hero::before {
-  content: '';
+/* Casino table SVG art at the bottom of the hero */
+.hero-table-art {
   position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg,   transparent, transparent 59px, rgba(255,255,255,0.018) 60px),
-    repeating-linear-gradient(90deg,  transparent, transparent 59px, rgba(255,255,255,0.018) 60px);
+  bottom: 0;
+  left: 0;
+  width: 100%;
   pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
 }
+.hero-table-art svg { width: 100%; display: block; }
 
 .hero-bg-suits {
   position: absolute;
@@ -201,6 +203,7 @@ body {
   pointer-events: none;
   overflow: hidden;
   opacity: 0.04;
+  z-index: 0;
 }
 
 .hero-bg-suits span {
@@ -227,7 +230,7 @@ body {
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -619,8 +622,9 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding: 1.2rem 1rem 2rem;
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .bankroll-bar {
@@ -628,31 +632,72 @@ body {
   justify-content: space-between;
   width: 100%;
   max-width: 640px;
-  padding: 0.6rem 1.3rem;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid var(--panel-border);
-  border-radius: 10px;
-  font-size: 0.95rem;
+  padding: 0.7rem 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(20,60,30,0.7) 0%, rgba(0,0,0,0.6) 100%);
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-muted);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
 }
-.bankroll-bar strong { color: var(--accent); }
+.bankroll-bar strong { color: var(--accent); font-family: 'Playfair Display', serif; font-size: 1.1rem; }
 .bet-display { color: var(--text-muted); }
+
+/* Bankroll gain/loss flash */
+@keyframes bankrollWin  { 0%,100% { color: var(--accent); } 50% { color: #4caf50; } }
+@keyframes bankrollLoss { 0%,100% { color: var(--accent); } 50% { color: #ef5350; } }
+.bankroll-win  { animation: bankrollWin  0.6s ease; }
+.bankroll-loss { animation: bankrollLoss 0.6s ease; }
 
 .table-area {
   width: 100%;
   max-width: 640px;
-  min-height: 135px;
-  background: var(--felt);
-  border: 2px solid rgba(212,175,55,0.12);
-  border-radius: 16px;
-  padding: 1rem 1.3rem 1rem;
+  min-height: 148px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(30,110,55,0.55) 0%, transparent 80%),
+    var(--felt);
+  border: 2px solid rgba(212,175,55,0.22);
+  border-radius: 20px;
+  padding: 1rem 1.4rem 1rem;
   position: relative;
   box-shadow:
-    inset 0 2px 10px rgba(0,0,0,0.4),
-    0 6px 24px rgba(0,0,0,0.45);
+    inset 0 3px 14px rgba(0,0,0,0.45),
+    inset 0 -2px 8px rgba(0,0,0,0.3),
+    0 8px 30px rgba(0,0,0,0.55);
+  /* Felt texture via gradient hatching */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(30,110,55,0.5) 0%, transparent 80%),
+    repeating-linear-gradient(0deg,   transparent, transparent 3px, rgba(0,0,0,0.04) 4px),
+    repeating-linear-gradient(90deg,  transparent, transparent 3px, rgba(0,0,0,0.04) 4px);
+  background-color: var(--felt);
 }
-.dealer-area { border-bottom: none; border-radius: 16px 16px 0 0; }
-.player-area { border-top: none; border-radius: 0 0 16px 16px; background: var(--felt-dark); }
+.dealer-area {
+  border-bottom: 2px solid rgba(212,175,55,0.1);
+  border-radius: 20px 20px 4px 4px;
+  /* Felt slightly lighter for dealer side */
+  background-color: #1a5e2c;
+}
+.player-area {
+  border-top: 2px solid rgba(212,175,55,0.1);
+  border-radius: 4px 4px 20px 20px;
+  background-color: var(--felt-dark);
+}
+/* Betting arc painted on the felt */
+.player-area::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 40px;
+  border: 1.5px dashed rgba(212,175,55,0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
 
 .area-label {
   font-size: 0.78rem;
@@ -689,24 +734,30 @@ body {
 .message-banner {
   width: 100%;
   max-width: 640px;
-  padding: 0.7rem 1.3rem;
+  padding: 0.8rem 1.5rem;
   background: var(--message-bg);
   border: 1px solid var(--panel-border);
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   font-weight: 700;
-  min-height: 44px;
-  transition: color 0.2s;
+  min-height: 50px;
+  transition: color 0.2s, border-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
 }
 
 .card {
-  width: 62px;
-  height: 90px;
-  background: var(--card-bg);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 2px 3px 12px var(--card-shadow);
+  width: 72px;
+  height: 102px;
+  background: linear-gradient(145deg, #ffffff 0%, #f5f0e8 100%);
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow:
+    3px 5px 16px var(--card-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.9);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -714,13 +765,15 @@ body {
   padding: 5px 6px;
   font-family: 'Georgia', serif;
   flex-shrink: 0;
-  animation: dealCard 0.25s ease;
+  animation: dealCard 0.28s cubic-bezier(0.18,0.89,0.32,1.28);
   user-select: none;
+  transition: transform 0.15s;
 }
+.card:hover { transform: translateY(-4px) scale(1.04); }
 
 @keyframes dealCard {
-  from { opacity: 0; transform: translateY(-20px) scale(0.82); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(-30px) rotate(-5deg) scale(0.75); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
 }
 
 .card.red   { color: #c0392b; }
@@ -736,33 +789,43 @@ body {
   align-self: flex-end;
   transform: rotate(180deg);
 }
-.card-rank       { font-size: 0.8rem; font-weight: 700; line-height: 1; }
-.card-suit-corner { font-size: 0.65rem; line-height: 1; }
+.card-rank       { font-size: 0.88rem; font-weight: 700; line-height: 1; }
+.card-suit-corner { font-size: 0.7rem; line-height: 1; }
 .card-center-suit {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.4rem;
-  opacity: 0.13;
+  font-size: 1.8rem;
+  opacity: 0.09;
   pointer-events: none;
 }
 
 .card.face-down {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--card-back),
-    var(--card-back) 5px,
-    var(--card-back-pat) 5px,
-    var(--card-back-pat) 10px
-  );
-  border-color: rgba(255,255,255,0.2);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--card-back),
+      var(--card-back) 6px,
+      var(--card-back-pat) 6px,
+      var(--card-back-pat) 12px
+    );
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 3px 5px 16px rgba(0,0,0,0.7), inset 0 0 0 4px rgba(255,255,255,0.06);
+}
+.card.face-down::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  pointer-events: none;
 }
 .card.face-down .card-back-label {
-  font-size: 1.8rem;
+  font-size: 2rem;
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
 .panel {
@@ -804,15 +867,73 @@ body {
   color: var(--chip-text);
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -2px 0 rgba(0,0,0,0.2);
+  position: relative;
 }
-.chip:hover  { transform: translateY(-4px) scale(1.1); box-shadow: 0 8px 18px rgba(0,0,0,0.5); }
-.chip:active { transform: scale(0.93); }
-.chip-5   { background: #c0392b; }
-.chip-10  { background: #2980b9; }
-.chip-25  { background: #27ae60; }
-.chip-50  { background: #8e44ad; }
-.chip-100 { background: #e67e22; }
+.chip:hover  { transform: translateY(-6px) scale(1.12); box-shadow: 0 10px 22px rgba(0,0,0,0.55); }
+.chip:active { transform: scale(0.9); }
+
+/* Chip toss animation */
+@keyframes chipToss {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(-22px) scale(1.18); }
+  70%  { transform: translateY(-10px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
+}
+.chip.toss { animation: chipToss 0.32s cubic-bezier(0.18,0.89,0.32,1.3); }
+
+.chip-5   { background: radial-gradient(circle at 35% 35%, #e74c3c, #992d22); }
+.chip-10  { background: radial-gradient(circle at 35% 35%, #3498db, #1f618d); }
+.chip-25  { background: radial-gradient(circle at 35% 35%, #2ecc71, #1a8a4a); }
+.chip-50  { background: radial-gradient(circle at 35% 35%, #9b59b6, #6c3483); }
+.chip-100 { background: radial-gradient(circle at 35% 35%, #e67e22, #a04000); }
+
+/* ── Chip Tray ─────────────────────────────────────────────── */
+.chip-tray {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px;
+  width: 100%;
+}
+.tray-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+.tray-stacks {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+.tray-stack {
+  display: flex;
+  flex-direction: column;
+  gap: -3px;
+  align-items: center;
+}
+.tray-chip {
+  width: 42px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.22);
+  margin-top: -5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+.tc-red    { background: radial-gradient(circle at 35% 35%, #e74c3c, #992d22); }
+.tc-blue   { background: radial-gradient(circle at 35% 35%, #3498db, #1f618d); }
+.tc-green  { background: radial-gradient(circle at 35% 35%, #2ecc71, #1a8a4a); }
+.tc-purple { background: radial-gradient(circle at 35% 35%, #9b59b6, #6c3483); }
+.tc-orange { background: radial-gradient(circle at 35% 35%, #e67e22, #a04000); }
 
 .bet-action-row {
   display: flex;
@@ -1173,18 +1294,192 @@ body {
   .hero-stats-strip { gap: 0.5rem; padding: 0.7rem 1rem; }
   .hstat-val { font-size: 1rem; }
   .chip { width: 48px; height: 48px; font-size: 0.7rem; }
-  .card { width: 52px; height: 76px; padding: 4px 5px; }
-  .card-center-suit { font-size: 1.1rem; }
+  .card { width: 58px; height: 84px; padding: 4px 5px; }
+  .card-center-suit { font-size: 1.3rem; }
   .btn-action { padding: 0.62rem 1.1rem; font-size: 0.9rem; }
   .stats-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
   .history-header { flex-direction: column; align-items: flex-start; }
   .features-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+  .casino-scene { flex-direction: column; }
+  .dealer-portrait-wrap { width: 100%; max-width: 100%; padding: 0.5rem 1rem 0; }
+  .dealer-portrait { flex-direction: row; gap: 1rem; padding: 0.7rem 1rem; max-width: 100%; }
+  .dealer-svg { width: 80px; height: 100px; }
+  .dealer-name-tag { font-size: 0.75rem; }
+  .dealer-speech { font-size: 0.78rem; }
 }
 
 @media (max-width: 400px) {
   .btn-action { padding: 0.55rem 0.85rem; font-size: 0.85rem; }
   .chip { width: 44px; height: 44px; font-size: 0.66rem; }
   .hero-actions { flex-direction: column; align-items: center; }
+}
+
+/* =============================================
+   CASINO SCENE  (Dealer portrait + table)
+   ============================================= */
+
+#view-game {
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(23,60,35,0.6) 0%, transparent 55%),
+    var(--bg);
+}
+
+.casino-scene {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 0.5rem 2rem;
+}
+
+/* ----------  Dealer Column  ---------- */
+.dealer-portrait-wrap {
+  position: sticky;
+  top: 70px;
+  flex-shrink: 0;
+  width: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.2rem 0.5rem 0 0.5rem;
+}
+
+.dealer-portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 18px;
+  padding: 1.2rem 1rem;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 0 0 1px rgba(212,175,55,0.06);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  transition: box-shadow 0.4s;
+}
+
+/* Glow state classes toggled by JS */
+.dealer-portrait.glow-win {
+  box-shadow: 0 0 30px rgba(76,175,80,0.5), 0 8px 30px rgba(0,0,0,0.6);
+  border-color: rgba(76,175,80,0.5);
+}
+.dealer-portrait.glow-loss {
+  box-shadow: 0 0 30px rgba(239,83,80,0.5), 0 8px 30px rgba(0,0,0,0.6);
+  border-color: rgba(239,83,80,0.4);
+}
+.dealer-portrait.glow-bj {
+  box-shadow: 0 0 40px rgba(212,175,55,0.7), 0 8px 40px rgba(0,0,0,0.6);
+  border-color: rgba(212,175,55,0.7);
+}
+
+.dealer-svg {
+  width: 150px;
+  height: 188px;
+  border-radius: 10px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  transition: transform 0.3s;
+}
+
+/* Dealer idle head bob */
+@keyframes dealerBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+.dealer-svg { animation: dealerBob 4s ease-in-out infinite; }
+
+/* Dealer "thinking" shake on player bust */
+@keyframes dealerShake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-5px); }
+  40%     { transform: translateX(5px); }
+  60%     { transform: translateX(-4px); }
+  80%     { transform: translateX(4px); }
+}
+.dealer-svg.shake { animation: dealerShake 0.5s ease; }
+
+/* Dealer "celebrate" bounce */
+@keyframes dealerBounce {
+  0%,100% { transform: translateY(0) scale(1); }
+  30%     { transform: translateY(-10px) scale(1.04); }
+  60%     { transform: translateY(-4px) scale(1.02); }
+}
+.dealer-svg.bounce { animation: dealerBounce 0.6s ease; }
+
+/* Dealer name badge */
+.dealer-name-tag {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* Speech bubble */
+.dealer-speech {
+  position: relative;
+  background: rgba(20,20,20,0.85);
+  border: 1px solid rgba(212,175,55,0.28);
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.45;
+  width: 100%;
+  min-height: 44px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+/* Bubble pointer */
+.dealer-speech::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(212,175,55,0.28);
+}
+.dealer-speech::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid rgba(20,20,20,0.85);
+}
+
+/* Speech animation */
+@keyframes speechPop {
+  from { opacity: 0; transform: scale(0.9) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.dealer-speech.pop { animation: speechPop 0.25s ease; }
+
+/* Divider line on the portrait */
+.dealer-portrait hr {
+  width: 60%;
+  border: none;
+  border-top: 1px solid rgba(212,175,55,0.2);
+}
+
+/* ----------  Responsive adjustments  ---------- */
+@media (max-width: 860px) {
+  .dealer-portrait-wrap { width: 170px; }
+  .dealer-svg { width: 120px; height: 150px; }
 }
 
