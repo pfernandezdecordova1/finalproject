@@ -27,350 +27,39 @@
 
   <section id="view-home" class="view active" aria-labelledby="home-title">
 
-    <div class="hero">
-      <div class="hero-bg-suits" aria-hidden="true">
+    <div class="splash">
+      <div class="splash-bg-suits" aria-hidden="true">
         <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
         <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
       </div>
 
-      <div class="hero-spotlights" aria-hidden="true">
-        <div class="spotlight sl-1"></div>
-        <div class="spotlight sl-2"></div>
-        <div class="spotlight sl-3"></div>
+      <div class="splash-cards" aria-hidden="true">
+        <div class="splash-card" id="splash-card-1">
+          <div class="splash-card-inner">
+            <div class="splash-card-back"></div>
+            <div class="splash-card-front splash-card-black">
+              <span class="sc-tl">A<br><small>♠</small></span>
+              <span class="sc-suit">♠</span>
+              <span class="sc-br">A<br><small>♠</small></span>
+            </div>
+          </div>
+        </div>
+        <div class="splash-card" id="splash-card-2">
+          <div class="splash-card-inner">
+            <div class="splash-card-back"></div>
+            <div class="splash-card-front splash-card-red">
+              <span class="sc-tl">K<br><small>♥</small></span>
+              <span class="sc-suit">♥</span>
+              <span class="sc-br">K<br><small>♥</small></span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="hero-cards-left" aria-hidden="true">
-        <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg" width="200" height="300">
-          <rect x="5" y="50" width="110" height="155" rx="9" fill="#1a3a8b" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" transform="rotate(-22,60,127)"/>
-          <rect x="12" y="57" width="97" height="141" rx="6" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1" transform="rotate(-22,60,127)"/>
-          <rect x="18" y="35" width="110" height="155" rx="9" fill="#fffdf5" stroke="#d0c8b8" stroke-width="1" transform="rotate(-8,73,112)"/>
-          <text x="26" y="56" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#111" transform="rotate(-8,73,112)">A</text>
-          <text x="26" y="70" font-family="Georgia,serif" font-size="12" fill="#111" transform="rotate(-8,73,112)">♠</text>
-          <text x="73" y="135" font-family="Georgia,serif" font-size="52" fill="#111" text-anchor="middle" transform="rotate(-8,73,135)">♠</text>
-          <rect x="55" y="20" width="110" height="155" rx="9" fill="#fffdf5" stroke="#d0c8b8" stroke-width="1" transform="rotate(10,110,97)"/>
-          <text x="63" y="41" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#c0392b" transform="rotate(10,110,97)">K</text>
-          <text x="63" y="55" font-family="Georgia,serif" font-size="12" fill="#c0392b" transform="rotate(10,110,97)">♥</text>
-          <text x="110" y="120" font-family="Georgia,serif" font-size="52" fill="#c0392b" text-anchor="middle" transform="rotate(10,110,120)">♥</text>
-        </svg>
-      </div>
-
-      <div class="hero-chips-right" aria-hidden="true">
-        <svg viewBox="0 0 100 252" xmlns="http://www.w3.org/2000/svg" width="100" height="252">
-          <ellipse cx="50" cy="240" rx="38" ry="9" fill="rgba(0,0,0,0.45)"/>
-          <ellipse cx="50" cy="218" rx="36" ry="10" fill="#e67e22"/>
-          <ellipse cx="50" cy="213" rx="36" ry="10" fill="#d35400"/>
-          <ellipse cx="50" cy="208" rx="36" ry="10" fill="#e78e2a" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" stroke-dasharray="5,4"/>
-          <text x="50" y="212" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="8" font-weight="800">$100</text>
-          <ellipse cx="50" cy="191" rx="36" ry="10" fill="#8e44ad"/>
-          <ellipse cx="50" cy="186" rx="36" ry="10" fill="#7d3c98"/>
-          <ellipse cx="50" cy="181" rx="36" ry="10" fill="#9b59b6" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" stroke-dasharray="5,4"/>
-          <text x="50" y="185" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="8" font-weight="800">$50</text>
-          <ellipse cx="50" cy="164" rx="36" ry="10" fill="#27ae60"/>
-          <ellipse cx="50" cy="159" rx="36" ry="10" fill="#1e8449"/>
-          <ellipse cx="50" cy="154" rx="36" ry="10" fill="#2ecc71" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" stroke-dasharray="5,4"/>
-          <text x="50" y="158" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="8" font-weight="800">$25</text>
-          <ellipse cx="50" cy="137" rx="36" ry="10" fill="#2980b9"/>
-          <ellipse cx="50" cy="132" rx="36" ry="10" fill="#1a6496"/>
-          <ellipse cx="50" cy="127" rx="36" ry="10" fill="#3498db" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" stroke-dasharray="5,4"/>
-          <text x="50" y="131" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="8" font-weight="800">$10</text>
-          <ellipse cx="50" cy="110" rx="36" ry="10" fill="#c0392b"/>
-          <ellipse cx="50" cy="105" rx="36" ry="10" fill="#a93226"/>
-          <ellipse cx="50" cy="100" rx="36" ry="10" fill="#e74c3c" stroke="rgba(255,255,255,0.32)" stroke-width="1.5" stroke-dasharray="5,4"/>
-          <text x="50" y="104" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="8" font-weight="800">$5</text>
-          <ellipse cx="50" cy="84" rx="30" ry="9" fill="#d4af37"/>
-          <ellipse cx="50" cy="79" rx="30" ry="9" fill="#c8a020"/>
-          <ellipse cx="50" cy="74" rx="30" ry="9" fill="#f5e27d" stroke="rgba(160,112,0,0.5)" stroke-width="1.5"/>
-          <text x="50" y="78" text-anchor="middle" fill="#3a2000" font-family="Georgia,serif" font-size="7" font-weight="800">$1,000</text>
-        </svg>
-      </div>
-
-      <div class="hero-table-art" aria-hidden="true">
-        <svg viewBox="0 0 1200 360" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-          
-          <rect x="420" y="18" width="360" height="75" rx="10" fill="rgba(8,3,2,0.85)" stroke="rgba(212,175,55,0.72)" stroke-width="2.5"/>
-          <rect x="430" y="28" width="340" height="55" rx="6" fill="none" stroke="rgba(212,175,55,0.22)" stroke-width="1"/>
-          <text x="600" y="57" text-anchor="middle" fill="#f5e27d" font-family="Georgia,serif" font-size="22" font-weight="700" letter-spacing="5">MR.BLACKJACK</text>
-          <text x="600" y="79" text-anchor="middle" fill="rgba(212,175,55,0.55)" font-family="Georgia,serif" font-size="10" letter-spacing="4">♠  ♥  CASINO  ♦  ♣</text>
-          <circle cx="436" cy="46" r="4" fill="rgba(255,240,120,0.8)"/><circle cx="455" cy="46" r="4" fill="rgba(255,240,120,0.5)"/>
-          <circle cx="474" cy="46" r="4" fill="rgba(255,240,120,0.8)"/><circle cx="726" cy="46" r="4" fill="rgba(255,240,120,0.8)"/>
-          <circle cx="745" cy="46" r="4" fill="rgba(255,240,120,0.5)"/><circle cx="764" cy="46" r="4" fill="rgba(255,240,120,0.8)"/>
-          <path d="M40 300 Q600 195 1160 300 L1160 324 Q600 224 40 324 Z" fill="#5c3010"/>
-          <path d="M44 296 Q600 190 1156 296" stroke="rgba(212,175,55,0.72)" stroke-width="2.5" fill="none"/>
-          <ellipse cx="600" cy="300" rx="565" ry="125" fill="#1a5e28"/>
-          <ellipse cx="600" cy="290" rx="540" ry="110" fill="#1d6830"/>
-          <ellipse cx="600" cy="280" rx="510" ry="95" fill="#217038"/>
-          <ellipse cx="600" cy="275" rx="490" ry="85" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
-          <ellipse cx="600" cy="268" rx="310" ry="58" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="2" stroke-dasharray="9,6"/>
-          <text x="600" y="275" text-anchor="middle" fill="rgba(212,175,55,0.48)" font-family="Georgia,serif" font-size="13" letter-spacing="3">BLACKJACK PAYS 3 TO 2</text>
-          <text x="600" y="290" text-anchor="middle" fill="rgba(212,175,55,0.28)" font-family="Georgia,serif" font-size="9" letter-spacing="2">Dealer stands on all 17s · Insurance 2:1</text>
-          <ellipse cx="295" cy="295" rx="32" ry="11" fill="none" stroke="rgba(212,175,55,0.28)" stroke-width="1.5"/>
-          <ellipse cx="600" cy="308" rx="38" ry="13" fill="none" stroke="rgba(212,175,55,0.38)" stroke-width="2"/>
-          <ellipse cx="905" cy="295" rx="32" ry="11" fill="none" stroke="rgba(212,175,55,0.28)" stroke-width="1.5"/>
-          <rect x="538" y="190" width="68" height="95" rx="8" fill="#1a3a8b" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" transform="rotate(-14,572,237)"/>
-          <rect x="545" y="197" width="55" height="82" rx="5" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" transform="rotate(-14,572,237)"/>
-          <rect x="555" y="186" width="68" height="95" rx="8" fill="#1a3a8b" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" transform="rotate(4,589,233)"/>
-          <rect x="575" y="193" width="68" height="98" rx="8" fill="#fffdf5" stroke="#c8c0b0" stroke-width="1" transform="rotate(-12,609,242)"/>
-          <text x="583" y="215" fill="#1a1a1a" font-family="Georgia,serif" font-size="17" font-weight="700" transform="rotate(-12,583,215)">A</text>
-          <text x="582" y="228" fill="#1a1a1a" font-family="Georgia,serif" font-size="10" transform="rotate(-12,582,228)">♠</text>
-          <text x="609" y="258" fill="#1a1a1a" font-family="Georgia,serif" font-size="36" text-anchor="middle" transform="rotate(-12,609,258)">♠</text>
-          <rect x="607" y="193" width="68" height="98" rx="8" fill="#fffdf5" stroke="#c8c0b0" stroke-width="1" transform="rotate(8,641,242)"/>
-          <text x="615" y="215" fill="#c0392b" font-family="Georgia,serif" font-size="17" font-weight="700" transform="rotate(8,615,215)">K</text>
-          <text x="614" y="228" fill="#c0392b" font-family="Georgia,serif" font-size="10" transform="rotate(8,614,228)">♥</text>
-          <text x="641" y="258" fill="#c0392b" font-family="Georgia,serif" font-size="36" text-anchor="middle" transform="rotate(8,641,258)">♥</text>
-          <text x="610" y="178" text-anchor="middle" fill="rgba(212,175,55,0.9)" font-family="Georgia,serif" font-size="13" font-weight="700" letter-spacing="3">✦ BLACKJACK ✦</text>
-          <ellipse cx="295" cy="285" rx="22" ry="7" fill="#e74c3c"/>
-          <ellipse cx="295" cy="279" rx="22" ry="7" fill="#c0392b"/>
-          <ellipse cx="295" cy="273" rx="22" ry="7" fill="#e74c3c" stroke="rgba(255,255,255,0.28)" stroke-dasharray="4,3"/>
-          <ellipse cx="324" cy="282" rx="22" ry="7" fill="#9b59b6"/>
-          <ellipse cx="324" cy="276" rx="22" ry="7" fill="#8e44ad" stroke="rgba(255,255,255,0.28)" stroke-dasharray="4,3"/>
-          <ellipse cx="905" cy="285" rx="22" ry="7" fill="#2ecc71"/>
-          <ellipse cx="905" cy="279" rx="22" ry="7" fill="#27ae60" stroke="rgba(255,255,255,0.28)" stroke-dasharray="4,3"/>
-          <ellipse cx="876" cy="282" rx="22" ry="7" fill="#3498db"/>
-          <ellipse cx="876" cy="276" rx="22" ry="7" fill="#2980b9" stroke="rgba(255,255,255,0.28)" stroke-dasharray="4,3"/>
-          <rect x="178" y="242" width="50" height="74" rx="6" fill="#fffdf5" stroke="#ccc" stroke-width="1" transform="rotate(-30,203,279)" opacity="0.72"/>
-          <text x="188" y="261" fill="#c0392b" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(-30,188,261)" opacity="0.72">9</text>
-          <text x="187" y="272" fill="#c0392b" font-family="Georgia,serif" font-size="9" transform="rotate(-30,187,272)" opacity="0.72">♦</text>
-          <rect x="948" y="242" width="50" height="74" rx="6" fill="#fffdf5" stroke="#ccc" stroke-width="1" transform="rotate(28,973,279)" opacity="0.72"/>
-          <text x="958" y="261" fill="#1a1a1a" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(28,958,261)" opacity="0.72">J</text>
-          <text x="957" y="272" fill="#1a1a1a" font-family="Georgia,serif" font-size="9" transform="rotate(28,957,272)" opacity="0.72">♣</text>
-          <ellipse cx="120" cy="295" rx="18" ry="6" fill="#e67e22" opacity="0.6"/>
-          <ellipse cx="120" cy="289" rx="18" ry="6" fill="#e67e22" opacity="0.5" stroke="rgba(255,255,255,0.2)" stroke-dasharray="3,3"/>
-          <ellipse cx="148" cy="292" rx="16" ry="5" fill="#3498db" opacity="0.5"/>
-          <ellipse cx="148" cy="287" rx="16" ry="5" fill="#3498db" opacity="0.45" stroke="rgba(255,255,255,0.2)" stroke-dasharray="3,3"/>
-          <ellipse cx="1080" cy="295" rx="18" ry="6" fill="#8e44ad" opacity="0.6"/>
-          <ellipse cx="1080" cy="289" rx="18" ry="6" fill="#8e44ad" opacity="0.5" stroke="rgba(255,255,255,0.2)" stroke-dasharray="3,3"/>
-          <ellipse cx="1052" cy="292" rx="16" ry="5" fill="#27ae60" opacity="0.5"/>
-          <ellipse cx="1052" cy="287" rx="16" ry="5" fill="#27ae60" opacity="0.45" stroke="rgba(255,255,255,0.2)" stroke-dasharray="3,3"/>
-        </svg>
-      </div>
-
-      <div class="hero-content">
-        <div class="hero-crown" aria-hidden="true"><div class="hero-crown-inner">21</div></div>
-        <div class="hero-badge">🏆 Premium Blackjack Experience</div>
+      <div class="splash-text">
         <h1 id="home-title">Mr.Blackjack</h1>
-        <div class="hero-suit-row" aria-hidden="true">♠ ♥ ♦ ♣</div>
-        <p class="hero-sub">The sharpest game of 21 on the web. Real casino rules, live betting, full strategy guides — and $1,000 in chips to get you started.</p>
-        <div class="hero-actions">
-          <button class="btn-primary btn-large" onclick="showView('game')">Play Now — It's Free</button>
-          <button class="btn-ghost" onclick="showView('strategy')">View Strategy Guide</button>
-        </div>
-        <div class="hero-stats-strip">
-          <div class="hstat"><span class="hstat-val">3:2</span><span class="hstat-lbl">BJ Payout</span></div>
-          <div class="hstat-divider"></div>
-          <div class="hstat"><span class="hstat-val">$1,000</span><span class="hstat-lbl">Starting Chips</span></div>
-          <div class="hstat-divider"></div>
-          <div class="hstat"><span class="hstat-val">Real Rules</span><span class="hstat-lbl">Vegas Standard</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-section">
-      <div class="features-section-header">
-        <div class="fsh-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
-        <h2>The Mr.Blackjack Experience</h2>
-        <p>Everything you need for a premium casino session, right in your browser.</p>
-      </div>
-      <div class="features-grid">
-
-        <div class="feature-card">
-          <div class="feature-visual spades-visual" aria-hidden="true">
-            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-              <ellipse cx="140" cy="125" rx="125" ry="42" fill="#1a5e28"/>
-              <ellipse cx="140" cy="120" rx="115" ry="36" fill="#1e6830"/>
-              <ellipse cx="140" cy="110" rx="85" ry="22" fill="none" stroke="rgba(212,175,55,0.35)" stroke-width="1.5" stroke-dasharray="6,4"/>
-              <rect x="75" y="55" width="52" height="76" rx="6" fill="#fffdf5" stroke="#ccc" transform="rotate(-14,101,93)"/>
-              <text x="80" y="75" fill="#1a1a1a" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(-14,80,75)">A</text>
-              <text x="80" y="86" fill="#1a1a1a" font-family="Georgia,serif" font-size="9" transform="rotate(-14,80,86)">♠</text>
-              <text x="101" y="106" fill="#1a1a1a" font-family="Georgia,serif" font-size="28" text-anchor="middle" transform="rotate(-14,101,106)">♠</text>
-              <rect x="110" y="50" width="52" height="76" rx="6" fill="#fffdf5" stroke="#ccc" transform="rotate(8,136,88)"/>
-              <text x="118" y="70" fill="#c0392b" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(8,118,70)">K</text>
-              <text x="118" y="81" fill="#c0392b" font-family="Georgia,serif" font-size="9" transform="rotate(8,118,81)">♥</text>
-              <text x="136" y="101" fill="#c0392b" font-family="Georgia,serif" font-size="28" text-anchor="middle" transform="rotate(8,136,101)">♥</text>
-              <rect x="150" y="58" width="52" height="76" rx="6" fill="#fffdf5" stroke="#ccc" transform="rotate(22,176,96)"/>
-              <text x="158" y="78" fill="#1a1a1a" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(22,158,78)">Q</text>
-              <text x="157" y="89" fill="#1a1a1a" font-family="Georgia,serif" font-size="9" transform="rotate(22,157,89)">♣</text>
-              <text x="176" y="110" fill="#1a1a1a" font-family="Georgia,serif" font-size="28" text-anchor="middle" transform="rotate(22,176,110)">♣</text>
-              <text x="140" y="118" text-anchor="middle" fill="rgba(212,175,55,0.4)" font-family="Georgia,serif" font-size="9" letter-spacing="2">BLACKJACK PAYS 3:2</text>
-            </svg>
-          </div>
-          <h3>Real Casino Rules</h3>
-          <p>Dealer hits soft 16, stands on all 17s. Natural blackjack pays 3:2. Double down on any first two cards. Vegas rules, every hand.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-visual chips-visual" aria-hidden="true">
-            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-              <ellipse cx="140" cy="152" rx="40" ry="10" fill="rgba(0,0,0,0.4)"/>
-              <ellipse cx="140" cy="136" rx="38" ry="11" fill="#e67e22"/>
-              <ellipse cx="140" cy="131" rx="38" ry="11" fill="#d35400"/>
-              <ellipse cx="140" cy="126" rx="38" ry="11" fill="#e78e2a" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="5,4"/>
-              <text x="140" y="130" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="9" font-weight="800">$100</text>
-              <ellipse cx="140" cy="108" rx="38" ry="11" fill="#8e44ad"/>
-              <ellipse cx="140" cy="103" rx="38" ry="11" fill="#7d3c98"/>
-              <ellipse cx="140" cy="98" rx="38" ry="11" fill="#9b59b6" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5,4"/>
-              <text x="140" y="102" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="9" font-weight="800">$50</text>
-              <ellipse cx="140" cy="80" rx="38" ry="11" fill="#27ae60"/>
-              <ellipse cx="140" cy="75" rx="38" ry="11" fill="#1e8449"/>
-              <ellipse cx="140" cy="70" rx="38" ry="11" fill="#2ecc71" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5,4"/>
-              <text x="140" y="74" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="9" font-weight="800">$25</text>
-              <ellipse cx="140" cy="52" rx="38" ry="11" fill="#2980b9"/>
-              <ellipse cx="140" cy="47" rx="38" ry="11" fill="#1a6496"/>
-              <ellipse cx="140" cy="42" rx="38" ry="11" fill="#3498db" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5,4"/>
-              <text x="140" y="46" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="9" font-weight="800">$10</text>
-              <ellipse cx="140" cy="24" rx="38" ry="11" fill="#c0392b"/>
-              <ellipse cx="140" cy="19" rx="38" ry="11" fill="#a93226"/>
-              <ellipse cx="140" cy="14" rx="38" ry="11" fill="#e74c3c" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5,4"/>
-              <text x="140" y="18" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="9" font-weight="800">$5</text>
-              <ellipse cx="58" cy="132" rx="26" ry="8" fill="#27ae60" opacity="0.9"/>
-              <ellipse cx="58" cy="127" rx="26" ry="8" fill="#2ecc71" stroke="rgba(255,255,255,0.3)" stroke-dasharray="4,3" opacity="0.9"/>
-              <ellipse cx="58" cy="118" rx="26" ry="8" fill="#27ae60" opacity="0.8" stroke="rgba(255,255,255,0.25)" stroke-dasharray="4,3"/>
-              <ellipse cx="222" cy="132" rx="26" ry="8" fill="#e74c3c" opacity="0.9"/>
-              <ellipse cx="222" cy="127" rx="26" ry="8" fill="#c0392b" stroke="rgba(255,255,255,0.3)" stroke-dasharray="4,3" opacity="0.9"/>
-              <ellipse cx="222" cy="118" rx="26" ry="8" fill="#e74c3c" opacity="0.8" stroke="rgba(255,255,255,0.25)" stroke-dasharray="4,3"/>
-            </svg>
-          </div>
-          <h3>Live Betting System</h3>
-          <p>Place bets with $5 to $100 chips. Clear your bet, go all in, or double down anytime. Every chip click feels like the real thing.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-visual chart-visual" aria-hidden="true">
-            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-              <rect x="16" y="10" width="248" height="140" rx="8" fill="rgba(0,0,0,0.4)"/>
-              <text x="140" y="28" text-anchor="middle" fill="rgba(212,175,55,0.7)" font-family="Georgia,serif" font-size="10" letter-spacing="2" font-weight="700">BASIC STRATEGY</text>
-              <text x="66" y="42" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">2</text>
-              <text x="86" y="42" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">5</text>
-              <text x="106" y="42" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">9</text>
-              <text x="126" y="42" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">10</text>
-              <text x="146" y="42" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8">A</text>
-              <text x="44" y="57" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8">16</text>
-              <rect x="57" y="47" width="18" height="14" rx="2" fill="rgba(76,175,80,0.75)"/><text x="66" y="58" text-anchor="middle" fill="white" font-size="7" font-weight="800">S</text>
-              <rect x="77" y="47" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="86" y="58" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="97" y="47" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="106" y="58" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="117" y="47" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="126" y="58" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="137" y="47" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="146" y="58" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <text x="44" y="77" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8">11</text>
-              <rect x="57" y="67" width="18" height="14" rx="2" fill="rgba(41,128,185,0.75)"/><text x="66" y="78" text-anchor="middle" fill="white" font-size="7" font-weight="800">D</text>
-              <rect x="77" y="67" width="18" height="14" rx="2" fill="rgba(41,128,185,0.75)"/><text x="86" y="78" text-anchor="middle" fill="white" font-size="7" font-weight="800">D</text>
-              <rect x="97" y="67" width="18" height="14" rx="2" fill="rgba(41,128,185,0.75)"/><text x="106" y="78" text-anchor="middle" fill="white" font-size="7" font-weight="800">D</text>
-              <rect x="117" y="67" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="126" y="78" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="137" y="67" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="146" y="78" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <text x="44" y="97" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8">8</text>
-              <rect x="57" y="87" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="66" y="98" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="77" y="87" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="86" y="98" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="97" y="87" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="106" y="98" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="117" y="87" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="126" y="98" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="137" y="87" width="18" height="14" rx="2" fill="rgba(239,83,80,0.75)"/><text x="146" y="98" text-anchor="middle" fill="white" font-size="7" font-weight="800">H</text>
-              <rect x="30" y="118" width="12" height="10" rx="2" fill="rgba(76,175,80,0.75)"/><text x="44" y="127" fill="rgba(255,255,255,0.6)" font-size="7">Stand</text>
-              <rect x="80" y="118" width="12" height="10" rx="2" fill="rgba(239,83,80,0.75)"/><text x="94" y="127" fill="rgba(255,255,255,0.6)" font-size="7">Hit</text>
-              <rect x="120" y="118" width="12" height="10" rx="2" fill="rgba(41,128,185,0.75)"/><text x="134" y="127" fill="rgba(255,255,255,0.6)" font-size="7">Double</text>
-            </svg>
-          </div>
-          <h3>Full Strategy Guide</h3>
-          <p>Our built-in basic strategy chart covers every hard total, soft hand, and pair — helping you make the correct play every time.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-visual stats-visual" aria-hidden="true">
-            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-              <path d="M118 28 L162 28 L162 60 Q162 90 140 100 Q118 90 118 60 Z" fill="rgba(212,175,55,0.85)" stroke="rgba(180,140,0,0.5)" stroke-width="1.5"/>
-              <rect x="132" y="100" width="16" height="22" rx="2" fill="rgba(180,140,0,0.7)"/>
-              <rect x="118" y="120" width="44" height="8" rx="2" fill="rgba(180,140,0,0.85)"/>
-              <path d="M118 40 Q100 40 100 58 Q100 72 118 74" stroke="rgba(212,175,55,0.7)" stroke-width="5" fill="none" stroke-linecap="round"/>
-              <path d="M162 40 Q180 40 180 58 Q180 72 162 74" stroke="rgba(212,175,55,0.7)" stroke-width="5" fill="none" stroke-linecap="round"/>
-              <text x="140" y="72" text-anchor="middle" fill="rgba(120,80,0,1)" font-family="Georgia,serif" font-size="18" font-weight="800">21</text>
-              <text x="22" y="148" fill="rgba(255,255,255,0.5)" font-size="8">Win rate</text>
-              <rect x="22" y="152" width="100" height="7" rx="3" fill="rgba(255,255,255,0.1)"/>
-              <rect x="22" y="152" width="64" height="7" rx="3" fill="rgba(76,175,80,0.75)"/>
-              <text x="130" y="159" fill="rgba(76,175,80,0.9)" font-size="8" font-weight="700">64%</text>
-              <text x="168" y="148" fill="rgba(255,255,255,0.5)" font-size="8">Hands played</text>
-              <text x="168" y="162" fill="rgba(212,175,55,0.9)" font-family="Georgia,serif" font-size="18" font-weight="800">247</text>
-            </svg>
-          </div>
-          <h3>Track Your Performance</h3>
-          <p>Detailed stats every session — win rate, hot streaks, peak bankroll, and a full hand-by-hand history log.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="rules-section">
-      <div class="rules-header">
-        <div class="rules-divider">
-          <span class="rd-suit">♠</span>
-          <span class="rd-text">How to Play</span>
-          <span class="rd-suit">♠</span>
-        </div>
-      </div>
-      <div class="rules-grid">
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">🃏</div>
-          <h3>The Goal</h3>
-          <p>Beat the dealer by getting a hand value as close to 21 as possible without going over (busting).</p>
-        </article>
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">🔢</div>
-          <h3>Card Values</h3>
-          <p>Number cards = face value. Face cards (J, Q, K) = 10. Ace = 1 <em>or</em> 11 — whichever helps your hand most.</p>
-        </article>
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">🎯</div>
-          <h3>Your Options</h3>
-          <ul>
-            <li><strong>Hit</strong> – draw another card</li>
-            <li><strong>Stand</strong> – keep your current hand</li>
-            <li><strong>Double Down</strong> – double your bet, one more card</li>
-          </ul>
-        </article>
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">🏦</div>
-          <h3>Dealer Rules</h3>
-          <p>Dealer must hit on 16 or less and stand on 17 or more. One dealer card starts face-down.</p>
-        </article>
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">💰</div>
-          <h3>Payouts</h3>
-          <ul>
-            <li>Win → <strong>1:1</strong></li>
-            <li>Push (tie) → <strong>Bet back</strong></li>
-            <li>Blackjack → <strong>3:2</strong></li>
-          </ul>
-        </article>
-
-        <article class="rule-card">
-          <div class="rule-icon" aria-hidden="true">♠</div>
-          <h3>Blackjack!</h3>
-          <p>An Ace + a 10-value card on the first two cards = Blackjack. Pays 3:2 unless the dealer also has it (push).</p>
-        </article>
-
-      </div>
-    </div>
-
-    <div class="cta-banner">
-      <div class="cta-banner-inner">
-        <div class="cta-card-art" aria-hidden="true">
-          <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
-            <rect x="80" y="5" width="52" height="76" rx="7" fill="#fffdf5" stroke="#ccc" transform="rotate(-18,106,43)"/>
-            <text x="88" y="26" fill="#1a1a1a" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(-18,88,26)">A</text>
-            <text x="87" y="37" fill="#1a1a1a" font-family="Georgia,serif" font-size="9" transform="rotate(-18,87,37)">♠</text>
-            <text x="106" y="58" fill="#1a1a1a" font-family="Georgia,serif" font-size="30" text-anchor="middle" transform="rotate(-18,106,58)">♠</text>
-            <rect x="118" y="5" width="52" height="76" rx="7" fill="#fffdf5" stroke="#ccc" transform="rotate(5,144,43)"/>
-            <text x="126" y="26" fill="#c0392b" font-family="Georgia,serif" font-size="14" font-weight="700" transform="rotate(5,126,26)">K</text>
-            <text x="125" y="37" fill="#c0392b" font-family="Georgia,serif" font-size="9" transform="rotate(5,125,37)">♥</text>
-            <text x="144" y="58" fill="#c0392b" font-family="Georgia,serif" font-size="30" text-anchor="middle" transform="rotate(5,144,58)">♥</text>
-            <rect x="158" y="5" width="52" height="76" rx="7" fill="#1a3a8b" stroke="rgba(255,255,255,0.15)" transform="rotate(22,184,43)"/>
-          </svg>
-        </div>
-        <div class="cta-suits" aria-hidden="true">♠ ♥ ♦ ♣</div>
-        <h2>Ready to Beat the Dealer?</h2>
-        <p>$1,000 in chips. No registration. No risk. Just pure blackjack.</p>
-        <button class="btn-primary btn-large cta-play-btn" onclick="showView('game')">Start Playing</button>
-        <div class="cta-hint">Free to play · Vegas rules · No download required</div>
+        <div class="splash-suits-row" aria-hidden="true">♠ &nbsp; ♥ &nbsp; ♦ &nbsp; ♣</div>
+        <button class="btn-gamble" onclick="showView('game')">Let's Gamble</button>
       </div>
     </div>
 
