@@ -3,8 +3,7 @@
 A fully-featured browser-based Blackjack game built with vanilla HTML, CSS, and JavaScript.
 
 # Live Demo: 
-- [https://yourusername.github.io/blackjack-royale]
-- (https://yourusername.github.io/blackjack-royale) 
+- [https://pfernandezdecordova1.github.io/finalproject](https://pfernandezdecordova1.github.io/finalproject)
 
 ## Description
 
