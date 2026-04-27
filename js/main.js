@@ -1,5 +1,4 @@
-// ── Dealer personality ──────────────────────────────────────────────────────
-
+﻿
 const DEALER_PHRASES = {
   idle:    ["Good luck, player.", "Place your bet.", "Ready when you are.", "The cards await.", "Feeling lucky?"],
   deal:    ["Cards are dealt.", "Here we go.", "Good hand? We'll see.", "Show me what you've got.", "The game begins."],
@@ -46,7 +45,6 @@ function dealerAnimate(type) {
   void svg.offsetWidth;
   if (type === 'shake')  svg.classList.add('shake');
   if (type === 'bounce') svg.classList.add('bounce');
-  // Remove animation class after it ends so it can replay
   svg.addEventListener('animationend', () => {
     svg.classList.remove('shake','bounce');
   }, {once: true});
@@ -58,8 +56,6 @@ function setPortraitGlow(type) {
   portrait.classList.remove('glow-win','glow-loss','glow-bj');
   if (type) portrait.classList.add('glow-' + type);
 }
-
-// ── Patched game functions ───────────────────────────────────────────────────
 
 const SUITS  = ['♠', '♥', '♦', '♣'];
 const RANKS  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
@@ -180,7 +176,6 @@ function addToBet(amount, chipEl) {
   state.currentBet += Math.min(amount, remaining);
   updateBetDisplay();
   clearBetHint();
-  // Chip toss animation
   if (chipEl) {
     chipEl.classList.remove('toss');
     void chipEl.offsetWidth;
@@ -334,7 +329,6 @@ function resolveRound(playerBJ, dealerBJ, playerBust = false) {
   updateStats(result, profit);
   setMessage(message, msgColor);
 
-  // Bankroll flash
   const brEl = document.getElementById('bankroll-display');
   if (brEl) {
     brEl.classList.remove('bankroll-win','bankroll-loss');
@@ -346,7 +340,6 @@ function resolveRound(playerBJ, dealerBJ, playerBust = false) {
 
   updateBankrollDisplay();
 
-  // Dealer reactions
   if (playerBJ && !dealerBJ) {
     setDealerMouth('surprised');
     dealerAnimate('shake');
@@ -493,8 +486,23 @@ function renderHands(hideHole) {
 }
 
 function updateScores(hideHole) {
-  document.getElementById('dealer-score-badge').textContent = scoreLabel(state.dealerHand, hideHole);
-  document.getElementById('player-score-badge').textContent = handValue(state.playerHand);
+  const db = document.getElementById('dealer-score-badge');
+  const pb = document.getElementById('player-score-badge');
+
+  db.textContent = scoreLabel(state.dealerHand, hideHole);
+  db.className = 'csbadge';
+  if (!hideHole && state.dealerHand.length > 0) {
+    if (handValue(state.dealerHand) > 21) db.classList.add('bust');
+    else if (isBlackjack(state.dealerHand)) db.classList.add('bj');
+  }
+
+  if (state.playerHand.length > 0) {
+    const pv = handValue(state.playerHand);
+    pb.textContent = pv;
+    pb.className = 'csbadge csbadge-player';
+    if (pv > 21) pb.classList.add('bust');
+    else if (isBlackjack(state.playerHand)) pb.classList.add('bj');
+  }
 }
 
 function showPanel(panelId) {
@@ -511,12 +519,17 @@ function setMessage(msg, color = 'var(--text)') {
 }
 
 function updateBetDisplay() {
-  document.getElementById('bet-display').textContent = state.currentBet.toLocaleString();
+  const val = state.currentBet.toLocaleString();
+  document.getElementById('bet-display').textContent = val;
+  const tv = document.getElementById('bet-token-val');
+  if (tv) tv.textContent = val;
 }
 
 function updateBankrollDisplay() {
-  const el = document.getElementById('bankroll-display');
-  el.textContent = state.bankroll.toLocaleString();
+  const val = state.bankroll.toLocaleString();
+  document.getElementById('bankroll-display').textContent = val;
+  const el2 = document.getElementById('bankroll-display-2');
+  if (el2) el2.textContent = val;
 }
 
 function renderStats() {
@@ -629,7 +642,6 @@ function init() {
   updateBetDisplay();
   showPanel('betting-panel');
   showView('home');
-  // Greet on first load — slight delay so DOM is ready
   setTimeout(() => dealerSay('idle'), 300);
 }
 
