@@ -97,6 +97,14 @@ After setup, sign in from the Stats page and your peak bankroll will sync automa
 
 One of the trickier parts of building Blackjack was handling Ace values correctly. The solution was a handValue() function that initially counts every Ace as 11, then reduces the total by 10 for each Ace as long as the hand exceeds 21 — mimicking exactly how a real dealer would think through it. Animating the dealer's card draws required a recursive setTimeout approach, so each card appears sequentially with natural timing rather than all at once. Persisting the player's bankroll and stats across page refreshes was solved by serializing the full game state to localStorage after every hand, so nothing is ever lost on reload. Finally, keeping the card layout clean on mobile meant using Flexbox with flex-wrap on the hand containers, combined with media queries to scale card dimensions down on smaller screens. 
 
+## Future Improvements
+
+- Add multiplayer tables with private room codes for friends.
+- Expand cloud stats with session summaries and personal performance trends.
+- Add optional sound effects and music controls.
+- Introduce achievements/challenges for long-term replayability.
+- Add deeper tutorial mode for first-time blackjack players.
+
 ## Vercel Link 
 - https://finalproject-silk-six.vercel.app/
 

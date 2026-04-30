@@ -1740,6 +1740,7 @@ body {
     repeating-linear-gradient(0deg,  transparent, transparent 3px, rgba(0,0,0,0.06) 4px),
     repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.06) 4px);
   background-color: #200404;
+  overflow: hidden;
 }
 
 .oval-svg {
@@ -2249,5 +2250,115 @@ body {
 }
 @media (max-width: 400px) {
   .ft-casino-btn { min-width: 76px; padding: 0.6rem 0.9rem; font-size: 0.78rem; }
+}
+
+.table-ambience {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.table-ambience::before,
+.table-ambience::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 50% 50%, rgba(245,226,125,0.1), transparent 56%);
+  animation: tablePulse 9s ease-in-out infinite;
+}
+
+.table-ambience::after {
+  animation-delay: -4.5s;
+  opacity: 0.65;
+}
+
+@keyframes tablePulse {
+  0%, 100% { transform: scale(0.88); opacity: 0.22; }
+  50% { transform: scale(1.08); opacity: 0.48; }
+}
+
+.amb-chip {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.28);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.32), inset 0 2px 4px rgba(255,255,255,0.2);
+  opacity: 0.52;
+  animation: chipDrift 12s ease-in-out infinite;
+}
+
+.amb-chip::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.24);
+}
+
+.ac1 { top: 9%; left: 8%; background: radial-gradient(circle at 35% 35%, #e74c3c, #992d22); }
+.ac2 { top: 15%; right: 7%; background: radial-gradient(circle at 35% 35%, #3498db, #1f618d); animation-delay: -3s; }
+.ac3 { bottom: 18%; left: 14%; background: radial-gradient(circle at 35% 35%, #2ecc71, #1a8a4a); animation-delay: -7s; }
+.ac4 { bottom: 12%; right: 12%; background: radial-gradient(circle at 35% 35%, #e67e22, #a04000); animation-delay: -10s; }
+
+@keyframes chipDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(8deg); }
+}
+
+.strategy-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.strategy-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-card {
+  background: var(--rule-card-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 1rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.gallery-art {
+  border-radius: 10px;
+  border: 1px solid rgba(212,175,55,0.22);
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.18));
+  margin-bottom: 0.7rem;
+}
+
+.gallery-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gallery-card h4 {
+  font-size: 0.97rem;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+}
+
+.gallery-card p {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 680px) {
+  .amb-chip { width: 38px; height: 38px; opacity: 0.42; }
 }
 

@@ -74,6 +74,12 @@
     <h2 id="game-title" class="sr-only">Blackjack Table</h2>
 
     <div class="felt-table">
+      <div class="table-ambience" aria-hidden="true">
+        <span class="amb-chip ac1"></span>
+        <span class="amb-chip ac2"></span>
+        <span class="amb-chip ac3"></span>
+        <span class="amb-chip ac4"></span>
+      </div>
 
 <svg class="oval-svg" viewBox="0 0 800 560" preserveAspectRatio="none" aria-hidden="true">
         <defs>
@@ -337,6 +343,61 @@
             <h4>Hit 16 vs. Dealer 7+</h4>
             <p>A hard 16 against dealer 7 through Ace is one of the worst hands in blackjack. Hit — standing is statistically worse.</p>
           </div>
+        </div>
+      </div>
+
+      <div class="strategy-gallery" aria-labelledby="strategy-gallery-title">
+        <h3 id="strategy-gallery-title" class="chart-title">Table Visual Notes</h3>
+        <div class="strategy-gallery-grid">
+          <article class="gallery-card">
+            <div class="gallery-art" aria-hidden="true">
+              <svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="10" width="80" height="118" rx="12" fill="#fffdf5" stroke="#d4c9aa"/>
+                <rect x="80" y="8" width="80" height="118" rx="12" fill="#fffdf5" stroke="#d4c9aa"/>
+                <rect x="152" y="10" width="80" height="118" rx="12" fill="#fffdf5" stroke="#d4c9aa"/>
+                <text x="26" y="34" font-size="22" fill="#102015" font-family="Georgia">A♠</text>
+                <text x="100" y="34" font-size="22" fill="#b10f24" font-family="Georgia">10♥</text>
+                <text x="170" y="34" font-size="22" fill="#102015" font-family="Georgia">Q♣</text>
+                <text x="122" y="112" text-anchor="middle" font-size="20" fill="#d4af37" font-family="Georgia">21</text>
+              </svg>
+            </div>
+            <h4>Read Table Tempo</h4>
+            <p>Wait for dealer reveals before rushing decisions. Pace control helps reduce mistakes.</p>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-art" aria-hidden="true">
+              <svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="120" cy="72" rx="102" ry="50" fill="#0f4f2c" stroke="#d4af37" stroke-width="2"/>
+                <circle cx="72" cy="74" r="23" fill="#c0392b"/>
+                <circle cx="112" cy="74" r="23" fill="#2980b9"/>
+                <circle cx="152" cy="74" r="23" fill="#27ae60"/>
+                <circle cx="192" cy="74" r="23" fill="#f39c12"/>
+                <text x="72" y="79" text-anchor="middle" font-size="14" fill="#fff">5</text>
+                <text x="112" y="79" text-anchor="middle" font-size="14" fill="#fff">10</text>
+                <text x="152" y="79" text-anchor="middle" font-size="14" fill="#fff">25</text>
+                <text x="192" y="79" text-anchor="middle" font-size="14" fill="#fff">50</text>
+              </svg>
+            </div>
+            <h4>Build Bets Gradually</h4>
+            <p>Increase chips after strong bankroll swings, not after emotions. Keep growth controlled.</p>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-art" aria-hidden="true">
+              <svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" width="204" height="98" rx="14" fill="#11192e" stroke="#d4af37"/>
+                <line x1="46" y1="96" x2="194" y2="96" stroke="#314160" stroke-width="2"/>
+                <rect x="48" y="78" width="24" height="18" fill="#ef5350"/>
+                <rect x="82" y="68" width="24" height="28" fill="#ef5350"/>
+                <rect x="116" y="58" width="24" height="38" fill="#ffb300"/>
+                <rect x="150" y="48" width="24" height="48" fill="#4caf50"/>
+                <text x="120" y="42" text-anchor="middle" font-size="14" fill="#f5e27d">Win Rate Trend</text>
+              </svg>
+            </div>
+            <h4>Track and Adapt</h4>
+            <p>Use your stats page after each session and spot where losses repeat most often.</p>
+          </article>
         </div>
       </div>
 
