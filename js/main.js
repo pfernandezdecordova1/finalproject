@@ -61,6 +61,17 @@ const SUITS  = ['♠', '♥', '♦', '♣'];
 const RANKS  = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 const STARTING_BANKROLL = 1000;
 const MAX_HISTORY_ROWS  = 50;
+const LEADERBOARD_LIMIT = 10;
+const LEADERBOARD_COLLECTION = 'leaderboard';
+
+const cloudState = {
+  isEnabled: false,
+  isInitialized: false,
+  auth: null,
+  db: null,
+  user: null,
+  bestSyncedPeak: 0
+};
 
 let state = {
   deck:        [],
@@ -80,6 +91,216 @@ let state = {
     history:      []
   }
 };
+
+function hasFirebaseConfig() {
+  const c = window.FIREBASE_CONFIG;
+  if (!c) return false;
+  const required = ['apiKey', 'authDomain', 'projectId', 'appId'];
+  return required.every(key => {
+    const value = String(c[key] || '').trim();
+    return value && !value.startsWith('YOUR_');
+  });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getPlayerName(user) {
+  if (!user) return 'Guest';
+  return user.displayName || user.email || `Player ${user.uid.slice(0, 6)}`;
+}
+
+function setAuthStatus(message, type = '') {
+  const el = document.getElementById('auth-status');
+  if (!el) return;
+  el.textContent = message;
+  el.classList.remove('error', 'success');
+  if (type) el.classList.add(type);
+}
+
+function updateAuthUi() {
+  const signInBtn = document.getElementById('google-signin-btn');
+  const signOutBtn = document.getElementById('google-signout-btn');
+  const signedInUserEl = document.getElementById('signed-in-user');
+  if (!signInBtn || !signOutBtn || !signedInUserEl) return;
+
+  if (!cloudState.isEnabled) {
+    signInBtn.disabled = true;
+    signOutBtn.classList.add('hidden');
+    signedInUserEl.textContent = 'Firebase not configured';
+    return;
+  }
+
+  if (cloudState.user) {
+    signInBtn.classList.add('hidden');
+    signOutBtn.classList.remove('hidden');
+    signInBtn.disabled = false;
+    signedInUserEl.textContent = `Signed in as ${getPlayerName(cloudState.user)}`;
+  } else {
+    signInBtn.classList.remove('hidden');
+    signOutBtn.classList.add('hidden');
+    signInBtn.disabled = false;
+    signedInUserEl.textContent = 'Sign in to submit your peak bankroll';
+  }
+}
+
+async function signInWithGoogle() {
+  if (!cloudState.auth) return;
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    await cloudState.auth.signInWithPopup(provider);
+    setAuthStatus('Signed in successfully.', 'success');
+  } catch (error) {
+    setAuthStatus(`Sign-in failed: ${error.message}`, 'error');
+  }
+}
+
+async function signOutFromGoogle() {
+  if (!cloudState.auth) return;
+  try {
+    await cloudState.auth.signOut();
+    setAuthStatus('Signed out.', '');
+  } catch (error) {
+    setAuthStatus(`Sign-out failed: ${error.message}`, 'error');
+  }
+}
+
+function setLeaderboardMessage(message) {
+  const tbody = document.getElementById('leaderboard-body');
+  if (!tbody) return;
+  tbody.innerHTML = `<tr><td colspan="4" class="empty-row">${escapeHtml(message)}</td></tr>`;
+}
+
+function formatCloudDate(timestamp) {
+  if (!timestamp || !timestamp.toDate) return 'Just now';
+  return timestamp.toDate().toLocaleString();
+}
+
+async function fetchLeaderboard() {
+  if (!cloudState.db) {
+    setLeaderboardMessage('Enable Firebase to view global rankings.');
+    return;
+  }
+  try {
+    const snapshot = await cloudState.db
+      .collection(LEADERBOARD_COLLECTION)
+      .orderBy('peakBankroll', 'desc')
+      .limit(LEADERBOARD_LIMIT)
+      .get();
+    const tbody = document.getElementById('leaderboard-body');
+    if (!tbody) return;
+
+    if (snapshot.empty) {
+      setLeaderboardMessage('No leaderboard entries yet. Be the first to set a peak bankroll.');
+      return;
+    }
+
+    const rows = [];
+    snapshot.forEach((doc, index) => {
+      const data = doc.data() || {};
+      const name = escapeHtml(data.displayName || data.email || `Player ${doc.id.slice(0, 6)}`);
+      const peak = Number(data.peakBankroll || 0).toLocaleString();
+      const isCurrent = cloudState.user && cloudState.user.uid === doc.id;
+      rows.push(`
+        <tr class="${isCurrent ? 'current-player' : ''}">
+          <td>#${index + 1}</td>
+          <td>${name}</td>
+          <td>$${peak}</td>
+          <td>${escapeHtml(formatCloudDate(data.updatedAt))}</td>
+        </tr>
+      `);
+    });
+    tbody.innerHTML = rows.join('');
+  } catch (error) {
+    setLeaderboardMessage(`Could not load leaderboard: ${error.message}`);
+  }
+}
+
+async function syncSignedInUserRecord() {
+  if (!cloudState.user || !cloudState.db) return;
+  const docRef = cloudState.db.collection(LEADERBOARD_COLLECTION).doc(cloudState.user.uid);
+  const docSnap = await docRef.get();
+  const cloudPeak = docSnap.exists ? Number(docSnap.data().peakBankroll || 0) : 0;
+  cloudState.bestSyncedPeak = cloudPeak;
+
+  if (cloudPeak > state.stats.peakBankroll) {
+    state.stats.peakBankroll = cloudPeak;
+    saveData();
+    renderStats();
+  }
+
+  await syncPeakBankrollToCloud();
+}
+
+async function syncPeakBankrollToCloud() {
+  if (!cloudState.user || !cloudState.db) return;
+  const localPeak = Number(state.stats.peakBankroll || 0);
+  if (localPeak <= cloudState.bestSyncedPeak) return;
+
+  try {
+    await cloudState.db.collection(LEADERBOARD_COLLECTION).doc(cloudState.user.uid).set({
+      uid: cloudState.user.uid,
+      displayName: cloudState.user.displayName || 'Blackjack Player',
+      email: cloudState.user.email || '',
+      peakBankroll: localPeak,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    cloudState.bestSyncedPeak = localPeak;
+  } catch (error) {
+    console.warn('Could not sync peak bankroll:', error.message);
+  }
+}
+
+function initCloudFeatures() {
+  if (cloudState.isInitialized) return;
+  cloudState.isInitialized = true;
+
+  const signInBtn = document.getElementById('google-signin-btn');
+  const signOutBtn = document.getElementById('google-signout-btn');
+  const refreshBtn = document.getElementById('leaderboard-refresh-btn');
+  if (signInBtn) signInBtn.addEventListener('click', signInWithGoogle);
+  if (signOutBtn) signOutBtn.addEventListener('click', signOutFromGoogle);
+  if (refreshBtn) refreshBtn.addEventListener('click', () => { void fetchLeaderboard(); });
+
+  if (!window.firebase || !hasFirebaseConfig()) {
+    setAuthStatus('Set your Firebase config to enable sign-in and global rankings.');
+    updateAuthUi();
+    setLeaderboardMessage('Enable Firebase to view global rankings.');
+    return;
+  }
+
+  try {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(window.FIREBASE_CONFIG);
+    }
+    cloudState.auth = firebase.auth();
+    cloudState.db = firebase.firestore();
+    cloudState.isEnabled = true;
+    setAuthStatus('Firebase ready. Sign in to publish your record.', 'success');
+    updateAuthUi();
+
+    cloudState.auth.onAuthStateChanged(async user => {
+      cloudState.user = user;
+      if (!user) cloudState.bestSyncedPeak = 0;
+      updateAuthUi();
+      if (user) {
+        await syncSignedInUserRecord();
+      }
+      await fetchLeaderboard();
+    });
+  } catch (error) {
+    cloudState.isEnabled = false;
+    setAuthStatus(`Firebase setup error: ${error.message}`, 'error');
+    updateAuthUi();
+    setLeaderboardMessage('Firebase failed to initialize. Check your config values.');
+  }
+}
 
 function loadSavedData() {
   try {
@@ -377,6 +598,7 @@ function resolveRound(playerBJ, dealerBJ, playerBust = false) {
   showPanel(state.bankroll <= 0 ? 'broke-panel' : 'round-over-panel');
   if (state.bankroll <= 0) dealerSay('broke');
   saveData();
+  void syncPeakBankrollToCloud().then(() => fetchLeaderboard());
 }
 
 function updateStats(result, profit) {
@@ -586,7 +808,7 @@ function renderHistory(filter = 'all') {
 }
 
 function filterHistory(filter) {
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  document.querySelectorAll('.history-section .filter-btn[data-filter]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
   });
   renderHistory(filter);
@@ -601,9 +823,16 @@ function showView(viewName) {
     btn.setAttribute('aria-current', btn.id === `nav-${viewName}` ? 'page' : 'false');
   });
   if (viewName === 'stats') {
+    try {
+      initCloudFeatures();
+    } catch (error) {
+      console.warn('Cloud features unavailable:', error.message);
+      setLeaderboardMessage('Cloud features are temporarily unavailable.');
+    }
     renderStats();
     renderHistory('all');
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    void fetchLeaderboard();
+    document.querySelectorAll('.history-section .filter-btn[data-filter]').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.filter === 'all');
     });
   }
@@ -640,8 +869,16 @@ function init() {
   loadSavedData();
   updateBankrollDisplay();
   updateBetDisplay();
-  showPanel('betting-panel');
+  showPanel(state.bankroll <= 0 ? 'broke-panel' : 'betting-panel');
   showView('home');
+  // Start auth setup immediately so the navbar sign-in works from any view.
+  setTimeout(() => {
+    try {
+      initCloudFeatures();
+    } catch (error) {
+      console.warn('Cloud init failed:', error.message);
+    }
+  }, 0);
   setTimeout(() => dealerSay('idle'), 300);
 }
 

@@ -29,6 +29,64 @@ This project is a fully-featured Blackjack web app playable in the browser. The 
 
 No external libraries or frameworks were used.
 
+## Firebase Leaderboard Setup (Google Sign-In)
+
+This project now includes optional Firebase integration for:
+- Google sign-in
+- Saving each player's highest `peakBankroll`
+- Showing a global top 10 leaderboard
+
+### 1) Create Firebase project
+
+1. Go to Firebase Console and create a project.
+2. Add a Web App to the project.
+3. Copy the web config values.
+
+### 2) Enable Authentication
+
+1. In Firebase Console, open `Authentication`.
+2. Go to `Sign-in method`.
+3. Enable `Google` provider.
+
+### 3) Enable Firestore
+
+1. Open `Firestore Database`.
+2. Create the database in production or test mode.
+
+### 4) Add your config
+
+Edit `js/firebase-config.js` and replace placeholder values:
+
+```js
+window.FIREBASE_CONFIG = {
+	apiKey: "YOUR_API_KEY",
+	authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+	projectId: "YOUR_PROJECT_ID",
+	storageBucket: "YOUR_PROJECT_ID.appspot.com",
+	messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+	appId: "YOUR_APP_ID"
+};
+```
+
+### 5) Firestore security rules (example)
+
+Use rules like these so users can update only their own leaderboard record:
+
+```txt
+rules_version = '2';
+service cloud.firestore {
+	match /databases/{database}/documents {
+		match /leaderboard/{userId} {
+			allow read: if true;
+			allow create, update: if request.auth != null && request.auth.uid == userId;
+			allow delete: if false;
+		}
+	}
+}
+```
+
+After setup, sign in from the Stats page and your peak bankroll will sync automatically whenever you beat your previous best.
+
 ## AI Tools Used
 
 - GitHub Copilot

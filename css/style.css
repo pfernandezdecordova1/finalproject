@@ -127,6 +127,13 @@ body {
 
 .nav-links { display: flex; gap: 0.3rem; }
 
+.nav-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+}
+
 .nav-btn {
   padding: 0.42rem 1rem;
   border: 1px solid transparent;
@@ -161,6 +168,20 @@ body {
   flex-shrink: 0;
 }
 .theme-toggle:hover { background: var(--btn-secondary-hover); }
+
+.nav-auth-btn {
+  padding: 0.38rem 0.72rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.nav-signed-user {
+  font-size: 0.77rem;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .view { display: none; animation: fadeIn 0.4s ease; }
 .view.active { display: block; }
@@ -1303,6 +1324,50 @@ body {
   padding: 2rem 1rem 1.4rem;
 }
 
+.cloud-panel {
+  max-width: 880px;
+  margin: 0 auto 1.1rem;
+  padding: 1.05rem 1.3rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  background: var(--panel-bg);
+}
+
+.cloud-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cloud-panel h3 {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.auth-status {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+}
+
+.auth-status.error { color: var(--loss-color); }
+.auth-status.success { color: var(--win-color); }
+
+.cloud-auth-row {
+  margin-top: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.signed-in-user {
+  font-size: 0.84rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -1417,6 +1482,12 @@ body {
 }
 .btn-reset-stats:hover { background: rgba(239,83,80,0.1); }
 
+.leaderboard-section { padding-top: 0.2rem; }
+
+#leaderboard-table tbody tr.current-player {
+  background: rgba(212,175,55,0.12) !important;
+}
+
 .site-footer {
   border-top: 1px solid var(--panel-border);
   background: rgba(0,0,0,0.4);
@@ -1451,6 +1522,14 @@ body {
   .nav-brand { font-size: 1rem; }
   .nav-btn { padding: 0.38rem 0.65rem; font-size: 0.8rem; }
   .theme-toggle { font-size: 0.78rem; padding: 0.36rem 0.65rem; }
+  .nav-right-tools {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+  .nav-auth-btn { font-size: 0.76rem; }
+  .nav-signed-user { max-width: 100%; }
   .hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
   .hero-stats-strip { gap: 0.5rem; padding: 0.7rem 1rem; }
   .hstat-val { font-size: 1rem; }
@@ -1460,6 +1539,7 @@ body {
   .btn-action { padding: 0.62rem 1.1rem; font-size: 0.9rem; }
   .stats-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem; }
   .history-header { flex-direction: column; align-items: flex-start; }
+  .cloud-panel-head { flex-direction: column; align-items: flex-start; }
   .features-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: center; text-align: center; }
   .casino-scene { flex-direction: column; }
